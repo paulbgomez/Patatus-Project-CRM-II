@@ -1,0 +1,13 @@
+Usage of the CRM console commands:
+
+ - new lead				Creates and registers a new Lead in the system.
+ - show leads			Shows a list of the current Leads registered.
+ - lookup lead <id>		Looks for a Lead with corresponding <id> and shows its info.
+ - convert <id>			Converts a Lead with corresponding <id> into a new Opportunity,
+                          prompting the user for the values needed during the conversion.
+ - show accounts        Shows a list of the current Accounts registered.
+ - close-won <id>		Closes an Opportunity with the corresponding <id>, with a sale made.
+ - close-lost <id>		Closes an Opportunity with the corresponding <id>, with no sale made.
+ - help					Shows this help screen.
+ - exit					Exits the CRM console.
+
