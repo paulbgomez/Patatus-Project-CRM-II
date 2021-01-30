@@ -1,4 +1,5 @@
-package com.ironhack.classes;
+package com.ironhack.model;
+import com.ironhack.model.classes.Lead;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

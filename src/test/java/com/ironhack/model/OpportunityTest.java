@@ -1,7 +1,9 @@
-package com.ironhack.classes;
+package com.ironhack.model;
 
-import com.ironhack.enums.Product;
-import com.ironhack.enums.Status;
+import com.ironhack.model.classes.Contact;
+import com.ironhack.model.classes.Opportunity;
+import com.ironhack.model.enums.Product;
+import com.ironhack.model.enums.Status;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

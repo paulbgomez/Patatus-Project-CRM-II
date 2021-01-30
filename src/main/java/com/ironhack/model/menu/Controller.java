@@ -1,4 +1,4 @@
-package com.ironhack.main.menu;
+package com.ironhack.model.menu;
 
 
 import javax.persistence.Entity;

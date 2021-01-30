@@ -1,8 +1,11 @@
-package com.ironhack.main.menu;
+package com.ironhack.model.menu;
 
-import com.ironhack.classes.*;
-import com.ironhack.enums.Industry;
-import com.ironhack.enums.Product;
+import com.ironhack.model.classes.Account;
+import com.ironhack.model.classes.Contact;
+import com.ironhack.model.classes.Lead;
+import com.ironhack.model.classes.Opportunity;
+import com.ironhack.model.enums.Industry;
+import com.ironhack.model.enums.Product;
 import com.ironhack.main.menu.command.Command;
 
 import javax.persistence.Entity;
@@ -14,7 +17,7 @@ import java.util.stream.Collectors;
 public class Menu {
     // Properties
     // To display the prompt in yellow.
-    private static final String USER_PROMPT = MenuColors.setColorYellow("CRM:>") + " ";
+    private static final String USER_PROMPT = com.ironhack.main.menu.MenuColors.setColorYellow("CRM:>") + " ";
 
     // Location of help source.
     private static final String HELP_FILEPATH = "src/main/resources/.help";

@@ -1,5 +1,5 @@
-package com.ironhack.classes;
-import com.ironhack.enums.Industry;
+package com.ironhack.model.classes;
+import com.ironhack.model.enums.Industry;
 
 import javax.persistence.*;
 

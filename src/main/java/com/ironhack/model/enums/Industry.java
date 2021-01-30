@@ -1,10 +1,12 @@
-package com.ironhack.enums;
+package com.ironhack.model.enums;
 
-public enum Product {
+public enum Industry {
     // Available values
-    HYBRID("Hybrid"),
-    FLATBED("Flatbed"),
-    BOX("Box");
+    PRODUCE("Produce"),
+    ECOMMERCE("e-Commerce"),
+    MANUFACTURING("Manufacturing"),
+    MEDICAL("Medical"),
+    OTHER("Other");
 
     // Properties
     private final String name;
@@ -12,7 +14,7 @@ public enum Product {
     // -----------------Methods------------------
 
     // To build an enum with a specific name.
-    Product(String name) {
+    Industry(String name) {
         this.name = name;
     }
 
@@ -22,10 +24,10 @@ public enum Product {
     }
 
     // To have the enum values in an array.
-    private static final Product values[] = values();
+    private static final Industry values[] = values();
 
     // To have the value according to the position.
-    public static Product get(int ordinal) {
+    public static Industry get(int ordinal) {
         return values[ordinal];
     }
 
@@ -40,15 +42,15 @@ public enum Product {
     }
 
     // To read from the string that the user enters.
-    public static Product get(String input) {
+    public static Industry get(String input) {
         return get(Integer.parseInt(input)-1);
     }
 
     // To display the menu options.
     public static String showOptions() {
         String options = "";
-        for(Product product : values) {
-            options += "[" + (product.ordinal()+1) + "]" + product/*.getName()*/ + " ";
+        for(Industry industry : values) {
+            options += "[" + (industry.ordinal()+1) + "]" + industry/*.getName()*/ + " ";
         }
         return options.trim();
     }

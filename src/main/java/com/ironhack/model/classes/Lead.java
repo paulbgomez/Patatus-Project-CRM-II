@@ -1,4 +1,4 @@
-package com.ironhack.classes;
+package com.ironhack.model.classes;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,8 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Contact {
-    // Properties:
+public class Lead {
+    // Properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,11 +16,11 @@ public class Contact {
     private String email;
     private String companyName;
 
-    // This is for the incremented self-generated id:
+    // To generate autoincrementID:
     private static int idGenerator = 0;
 
-    // Constructor:
-    public Contact(String name, String phoneNumber, String email, String companyName) {
+    // Constructor
+    public Lead(String name, String phoneNumber, String email, String companyName) {
         setId();
         setName(name);
         setPhoneNumber(phoneNumber);
@@ -30,7 +30,7 @@ public class Contact {
 
     // -----------------Methods------------------
 
-    // Override of the toString() method to display the Contacts in a more friendly way.
+    // Override of the toString() method to display the Leads in a more friendly way.
     @Override
     public String toString() {
         return "ID-" + id +
@@ -40,7 +40,7 @@ public class Contact {
                 " | companyName: " + companyName;
     }
 
-    // Getters & Setters:
+    //Getters & Setters
     public int getId() {
         return id;
     }
@@ -49,7 +49,7 @@ public class Contact {
         this.id = generateId();
     }
 
-    public static int generateId(){
+    public static int generateId()  {
         return idGenerator++;
     }
 
@@ -85,3 +85,4 @@ public class Contact {
         this.companyName = companyName;
     }
 }
+

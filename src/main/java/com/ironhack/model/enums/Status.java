@@ -1,4 +1,4 @@
-package com.ironhack.enums;
+package com.ironhack.model.enums;
 
 public enum Status {
     OPEN,
