@@ -39,6 +39,16 @@ public class Opportunity {
         setQuantity(quantity);
         setRepOpportunity(repOpportunity);
     }
+    // ESTO FURULA EN EL TEST PERO HAY QUE REVISAR LAS RELACIONES ¿ACCOUNT EN OPPORTUNITY? ¿QUÉ FUE ANTES, EL HUEVO O LA GALLINA?
+//    public Opportunity(Contact decisionMaker, Product product, int quantity, SalesRep repOpportunity, Account account) {
+//        setId();
+//        setDecisionMaker(decisionMaker);
+//        status = Status.OPEN;
+//        setProduct(product);
+//        setQuantity(quantity);
+//        setRepOpportunity(repOpportunity);
+//        setAccount(account);
+//    }
         // Este es el constructor viejo, sin SalesRep, para el programa tal como estaba. Se queda así de momento.
     public Opportunity(Contact decisionMaker, Product product, int quantity) {
         setId();

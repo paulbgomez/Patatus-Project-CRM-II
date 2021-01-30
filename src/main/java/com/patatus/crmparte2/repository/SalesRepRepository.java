@@ -24,4 +24,8 @@ public interface SalesRepRepository extends JpaRepository<SalesRep, Integer> {
 
     @Query("SELECT s FROM SalesRep s JOIN FETCH s.repOpportunity o WHERE o.product = :product")
     public Optional<SalesRep> findSalesRepByProduct(@Param("product") Product product);
+
+    // ESTO FURULA PERO HAY QUE REVISAR LAS RELACIONES ENTRE ACCOUNT Y OPPORTUNITY
+//    @Query("SELECT s FROM SalesRep s JOIN FETCH s.repOpportunity o JOIN FETCH o.account a WHERE a.city = :city")
+//    public Optional<List<SalesRep>> findSalesRepByCityOfAccount(@Param("city") String city);
 }

@@ -1,9 +1,7 @@
 package com.patatus.crmparte2.repository;
 
-import com.patatus.crmparte2.model.classes.Contact;
-import com.patatus.crmparte2.model.classes.Lead;
-import com.patatus.crmparte2.model.classes.Opportunity;
-import com.patatus.crmparte2.model.classes.SalesRep;
+import com.patatus.crmparte2.model.classes.*;
+import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +31,8 @@ public class SalesRepRepositoryTest {
     ContactRepository contactRepository;
     @Autowired
     OpportunityRepository opportunityRepository;
+    @Autowired
+    AccountRepository accountRepository;
 
     @BeforeEach
     public void setUp() {
@@ -46,6 +46,12 @@ public class SalesRepRepositoryTest {
         Contact contact1 = contactRepository.save(new Contact("bla", "916726410", "bla@wuw.com", "wuw"));
 
         Opportunity opportunity1 = opportunityRepository.save(new Opportunity(contact1, Product.BOX, 10, salesRep1));
+        Account account1 = accountRepository.save(new Account(Industry.PRODUCE, 10, "Madrid", "Europe", List.of(contact1), List.of(opportunity1)));
+
+        // ESTO FURULA EN EL TEST PERO HAY QUE REVISAR LAS RELACIONES.
+//        Account account1 = accountRepository.save(new Account(Industry.PRODUCE, 10, "Madrid", "Europe"));
+//        Opportunity opportunity1 = opportunityRepository.save(new Opportunity(contact1, Product.BOX, 10, salesRep1, account1));
+
 
 
         /* TODO: Esto de añadir así leads y oportunidades a las listas de los ManyToOne, habría que pensarlo para la app en producción:
@@ -58,7 +64,9 @@ public class SalesRepRepositoryTest {
 
     @AfterEach
     public void tearDown() {
+        accountRepository.deleteAll();
         opportunityRepository.deleteAll();
+        // accountRepository.deleteAll(); si metemos el account en el constructor del opportunity, hace falta que este delete vaya después del de opportunity.
         contactRepository.deleteAll();
         leadRepository.deleteAll();
         salesRepRepository.deleteAll();
@@ -78,6 +86,11 @@ public class SalesRepRepositoryTest {
         List<Opportunity> opportunityList = opportunityRepository.findAll();
         assertEquals(1, opportunityList.size());
         assertEquals(10, opportunityList.get(0).getQuantity());
+        // Accounts:
+//        List<Account> accountList = accountRepository.findAll();
+//        assertEquals(1, accountList.size());
+//        assertEquals(Industry.PRODUCE, accountList.get(0).getIndustry());
+
     }
 
     @Test
@@ -109,4 +122,15 @@ public class SalesRepRepositoryTest {
             fail("not present");
         }
     }
+
+//    @Test
+//    public void findSalesRepByCityOfAccount_ValidCity_RightSalesRep(){
+//        Optional<List<SalesRep>> salesRep = salesRepRepository.findSalesRepByCityOfAccount("Madrid");
+//        if (salesRep.isPresent()) {
+//            assertEquals("Pepe", salesRep.get().get(0).getName());
+//            System.out.println(salesRep.get().get(0).getName() + " tiene un account con ciudad " + salesRep.get().get(0).getRepOpportunity().get(0).getAccount().getCity());
+//        } else {
+//            fail("not present");
+//        }
+//    }
 }
