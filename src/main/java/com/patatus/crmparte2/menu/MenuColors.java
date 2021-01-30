@@ -1,6 +1,4 @@
-package com.patatus.crmparte2.model.menu;
-
-import javax.persistence.Entity;
+package com.patatus.crmparte2.menu;
 
 
 public class MenuColors {

@@ -1,7 +1,6 @@
-package com.patatus.crmparte2.main;
+package com.patatus.crmparte2.menu;
 
-import com.patatus.crmparte2.model.menu.command.Command;
-import com.patatus.crmparte2.model.menu.Menu;
+import com.patatus.crmparte2.menu.command.Command;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

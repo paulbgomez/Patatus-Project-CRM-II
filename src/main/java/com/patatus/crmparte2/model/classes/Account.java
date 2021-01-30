@@ -4,6 +4,7 @@ import com.patatus.crmparte2.model.enums.Industry;
 import javax.persistence.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,16 @@ public class Account {
     // Constructor
 
     public Account() {
+    }
+
+    public Account(Industry industry, int employeeCount, String city, String country) {
+        setId();
+        setIndustry(industry);
+        setEmployeeCount(employeeCount);
+        setCity(city);
+        setCountry(country);
+        setContactList(new ArrayList<Contact>());
+        setOpportunityList(new ArrayList<Opportunity>());
     }
 
     public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {

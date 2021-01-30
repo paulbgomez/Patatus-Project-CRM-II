@@ -1,4 +1,4 @@
-package com.patatus.crmparte2.model.menu.command;
+package com.patatus.crmparte2.menu.command;
 
 public enum Command {
     // List of available commands

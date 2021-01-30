@@ -1,4 +1,4 @@
-package com.patatus.crmparte2.model.menu.command;
+package com.patatus.crmparte2.menu.command;
 
 public class Keyword {
     // All the keywords you can use in the CRM system.
