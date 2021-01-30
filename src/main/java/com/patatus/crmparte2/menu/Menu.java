@@ -84,7 +84,7 @@ public class Menu {
                     Industry industry = Industry.get(industryOption);
 
                     System.out.print("Number of employees: ");
-                    int employeeCount = readNonNegativeInt("VALID Number of employees:");
+                    int employeeCount = readNonNegativeInt("VALID Number of employees: ");
                     System.out.print("City: ");
                     String city = scanner.nextLine().trim();
                     System.out.print("Country: ");

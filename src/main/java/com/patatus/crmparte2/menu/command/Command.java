@@ -54,13 +54,13 @@ public enum Command {
     MAX_QUANTITY(Keyword.MAX + " " + Keyword.QUANTITY),
     MIN_QUANTITY(Keyword.MIN + " " + Keyword.QUANTITY),
 
-    MEAN_OPPS_PER_ACCOUNT(Keyword.MEAN + " " + Keyword.OPPS + Keyword.PER + Keyword.ACCOUNT),
-    MEDIAN_OPPS_PER_ACCOUNT(Keyword.MEDIAN + " " + Keyword.OPPS + Keyword.PER + Keyword.ACCOUNT),
-    MAX_OPPS_PER_ACCOUNT(Keyword.MAX + " " + Keyword.OPPS + Keyword.PER + Keyword.ACCOUNT),
-    MIN_OPPS_PER_ACCOUNT(Keyword.MIN + " " + Keyword.OPPS + Keyword.PER + Keyword.ACCOUNT),
+    MEAN_OPPS_PER_ACCOUNT(Keyword.MEAN + " " + Keyword.OPPS + " " + Keyword.PER + " " + Keyword.ACCOUNT),
+    MEDIAN_OPPS_PER_ACCOUNT(Keyword.MEDIAN + " " + Keyword.OPPS + " " + Keyword.PER + " " + Keyword.ACCOUNT),
+    MAX_OPPS_PER_ACCOUNT(Keyword.MAX + " " + Keyword.OPPS + " " + Keyword.PER + " " + Keyword.ACCOUNT),
+    MIN_OPPS_PER_ACCOUNT(Keyword.MIN + " " + Keyword.OPPS + " " + Keyword.PER + " " + Keyword.ACCOUNT),
 
-    HELP(Keyword.HELP, 0),
-    EXIT(Keyword.EXIT, 0),
+    HELP(Keyword.HELP),
+    EXIT(Keyword.EXIT),
 
     UNKNOWN("UNKNOWN");
 
@@ -89,7 +89,7 @@ public enum Command {
     }
 
     // To know the number of words that make up the command.
-    private int length() {
+    private int keywordCount() {
         return symbol.split(" ").length;
     }
 
@@ -98,6 +98,9 @@ public enum Command {
         return this.nArgs;
     }
 
+    // To know the total length (keywords + nargs) of the command
+    private int length() { return keywordCount() + nArgs(); }
+
     // To check if it receives arguments.
     private boolean hasArgs() {
         return this.nArgs > 0;
@@ -105,7 +108,7 @@ public enum Command {
 
     // To read the argument.
     public int getArg(String[] inputArgs) {
-        return Integer.parseInt(inputArgs[length() + nArgs() - 1]);
+        return Integer.parseInt(inputArgs[length() - 1]);
     }
 
     // Method to get a command from the users input.
@@ -124,7 +127,7 @@ public enum Command {
                 if (command.equals(UNKNOWN)) continue;
 
                 if (normalizedInput.startsWith(command.getSymbol()) &&
-                    inputArgs.length == command.length() + command.nArgs()) {
+                    inputArgs.length == command.length()) {
                     if (command.hasArgs())
                         command.getArg(inputArgs);
                     return command;

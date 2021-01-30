@@ -1,5 +1,7 @@
 package com.patatus.crmparte2;
 
+import com.patatus.crmparte2.menu.Menu;
+import com.patatus.crmparte2.menu.MenuColors;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
