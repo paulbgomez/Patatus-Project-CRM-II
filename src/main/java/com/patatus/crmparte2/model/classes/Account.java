@@ -26,11 +26,9 @@ public class Account {
     // This is for the incremented self-generated id:
     private static int idGenerator = 0;
 
-    // Constructor
-
+    // Constructors:
     public Account() {
     }
-
     public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
         setId();
         setIndustry(industry);

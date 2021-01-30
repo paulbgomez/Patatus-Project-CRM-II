@@ -27,11 +27,19 @@ public class Opportunity {
     // To generate autoincrementID:
     private static int idGenerator = 0;
 
-    //Constructor
-
+    // Constructors:
     public Opportunity() {
     }
-
+    // Este constructor añade SalesRep, para las pruebas de la  BD. Se queda así de momento. Habría que añadir el Account también.
+    public Opportunity(Contact decisionMaker, Product product, int quantity, SalesRep repOpportunity) {
+        setId();
+        setDecisionMaker(decisionMaker);
+        status = Status.OPEN;
+        setProduct(product);
+        setQuantity(quantity);
+        setRepOpportunity(repOpportunity);
+    }
+        // Este es el constructor viejo, sin SalesRep, para el programa tal como estaba. Se queda así de momento.
     public Opportunity(Contact decisionMaker, Product product, int quantity) {
         setId();
         setDecisionMaker(decisionMaker);
