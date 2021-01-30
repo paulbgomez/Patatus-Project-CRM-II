@@ -1,4 +1,4 @@
-package com.patatus.crmparte2.repository.classesRepository;
+package com.patatus.crmparte2.repository;
 
 import com.patatus.crmparte2.model.classes.SalesRep;
 import com.patatus.crmparte2.model.enums.Product;

@@ -1,11 +1,10 @@
-package com.patatus.crmparte2.repository.classesRepository;
+package com.patatus.crmparte2.repository;
 
 import com.patatus.crmparte2.model.classes.Contact;
 import com.patatus.crmparte2.model.classes.Lead;
 import com.patatus.crmparte2.model.classes.Opportunity;
 import com.patatus.crmparte2.model.classes.SalesRep;
 import com.patatus.crmparte2.model.enums.Product;
-import com.patatus.crmparte2.model.enums.Status;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
