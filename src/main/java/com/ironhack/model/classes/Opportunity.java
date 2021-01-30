@@ -18,7 +18,9 @@ public class Opportunity {
     @Enumerated(EnumType.STRING)
     private Product product;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep repOpportunity;
 
     // To generate autoincrementID:
     private static int idGenerator = 0;
@@ -60,6 +62,7 @@ public class Opportunity {
     public void setId() {
         this.id = generateId();
     }
+
 
     public static int generateId()  {
         return idGenerator++;

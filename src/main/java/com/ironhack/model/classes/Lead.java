@@ -13,8 +13,9 @@ public class Lead {
     private String email;
     private String companyName;
 
-    @OneToOne
-
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep repLead;
 
     // To generate autoincrementID:
     private static int idGenerator = 0;

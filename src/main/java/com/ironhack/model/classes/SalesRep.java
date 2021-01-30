@@ -1,6 +1,7 @@
 package com.ironhack.model.classes;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class SalesRep {
@@ -10,8 +11,10 @@ public class SalesRep {
     private Integer id;
     private String name;
 
-    @OneToOne
-
+    @OneToMany(mappedBy = "repLead")
+    private List<Lead> repLead;
+    @OneToMany(mappedBy = "repOpportunity")
+    private List<Opportunity> repOpportunity;
 
     // To generate autoincrementID:
     private static int idGenerator = 0;
