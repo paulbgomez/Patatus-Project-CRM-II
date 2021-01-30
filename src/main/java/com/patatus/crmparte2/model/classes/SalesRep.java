@@ -19,10 +19,9 @@ public class SalesRep {
     // To generate autoincrementID:
     private static int idGenerator = 0;
 
-    //Constructors
+    // Constructors:
     public SalesRep() {
     }
-
     public SalesRep(String name) {
         setId();
         setName(name);

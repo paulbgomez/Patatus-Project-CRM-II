@@ -20,10 +20,20 @@ public class Lead {
     // To generate autoincrementID:
     private static int idGenerator = 0;
 
+
+    // Constructors:
     public Lead() {
     }
-
-    // Constructor
+        // Este constructor añade SalesRep, para las pruebas de la  BD. Se queda así de momento.
+    public Lead(String name, String phoneNumber, String email, String companyName, SalesRep repLead) {
+        setId();
+        setName(name);
+        setPhoneNumber(phoneNumber);
+        setEmail(email);
+        setCompanyName(companyName);
+        setRepLead(repLead);
+    }
+        // Este es el constructor viejo, sin SalesRep, para el programa tal como estaba. Se queda así de momento.
     public Lead(String name, String phoneNumber, String email, String companyName) {
         setId();
         setName(name);

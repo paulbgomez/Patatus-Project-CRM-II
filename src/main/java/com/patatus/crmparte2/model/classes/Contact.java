@@ -21,10 +21,9 @@ public class Contact {
     // This is for the incremented self-generated id:
     private static int idGenerator = 0;
 
+    // Constructors:
     public Contact() {
     }
-
-    // Constructor:
     public Contact(String name, String phoneNumber, String email, String companyName) {
         setId();
         setName(name);
