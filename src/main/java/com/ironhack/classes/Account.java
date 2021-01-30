@@ -1,12 +1,19 @@
 package com.ironhack.classes;
 import com.ironhack.enums.Industry;
 
+import javax.persistence.*;
+
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
 public class Account {
     // Properties
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Enumerated(EnumType.STRING)
     private Industry industry;
     private int employeeCount;
     private String city;

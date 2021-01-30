@@ -2,12 +2,19 @@ package com.ironhack.classes;
 
 import com.ironhack.enums.*;
 
+import javax.persistence.*;
+
+@Entity
 public class Opportunity {
     // Properties
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int quantity;
     private Contact decisionMaker;
+    @Enumerated(EnumType.STRING)
     private Status status;
+    @Enumerated(EnumType.STRING)
     private Product product;
 
     // To generate autoincrementID:

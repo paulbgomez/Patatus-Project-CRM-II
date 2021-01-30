@@ -5,11 +5,12 @@ import com.ironhack.enums.Industry;
 import com.ironhack.enums.Product;
 import com.ironhack.main.menu.command.Command;
 
+import javax.persistence.Entity;
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+@Entity
 public class Menu {
     // Properties
     // To display the prompt in yellow.

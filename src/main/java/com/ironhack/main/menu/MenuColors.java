@@ -1,5 +1,8 @@
 package com.ironhack.main.menu;
 
+import javax.persistence.Entity;
+
+@Entity
 public class MenuColors {
     private static final String RESET = "\033[0m";  // Text Reset
     private static final String YELLOW = "\033[0;33m";  // YELLOW
