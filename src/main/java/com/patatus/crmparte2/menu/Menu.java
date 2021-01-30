@@ -107,6 +107,72 @@ public class Menu {
                     System.out.println(controller.showAccounts());
                     break;
 
+                case NEW_SALESREP:
+                case SHOW_SALESREPS:
+                    System.out.println("not implemented yet");
+                    break;
+
+                case REPORT_LEAD_BY_SALESREP:
+                case REPORT_OPPORTUNITY_BY_SALESREP:
+                case REPORT_CLOSED_WON_BY_SALESREP:
+                case REPORT_CLOSED_LOST_BY_SALESREP:
+                case REPORT_OPEN_BY_SALESREP:
+                    System.out.println("not implemented yet");
+                    break;
+                    
+                case REPORT_LEAD_BY_PRODUCT:
+                case REPORT_OPPORTUNITY_BY_PRODUCT:
+                case REPORT_CLOSED_WON_BY_PRODUCT:
+                case REPORT_CLOSED_LOST_BY_PRODUCT:
+                case REPORT_OPEN_BY_PRODUCT:
+                    System.out.println("not implemented yet");
+                    break;
+
+                case REPORT_LEAD_BY_COUNTRY:
+                case REPORT_OPPORTUNITY_BY_COUNTRY:
+                case REPORT_CLOSED_WON_BY_COUNTRY:
+                case REPORT_CLOSED_LOST_BY_COUNTRY:
+                case REPORT_OPEN_BY_COUNTRY:
+                    System.out.println("not implemented yet");
+                    break;
+
+                case REPORT_LEAD_BY_CITY:
+                case REPORT_OPPORTUNITY_BY_CITY:
+                case REPORT_CLOSED_WON_BY_CITY:
+                case REPORT_CLOSED_LOST_BY_CITY:
+                case REPORT_OPEN_BY_CITY:
+                    System.out.println("not implemented yet");
+                    break;
+
+                case REPORT_LEAD_BY_INDUSTRY:
+                case REPORT_OPPORTUNITY_BY_INDUSTRY:
+                case REPORT_CLOSED_WON_BY_INDUSTRY:
+                case REPORT_CLOSED_LOST_BY_INDUSTRY:
+                case REPORT_OPEN_BY_INDUSTRY:
+                    System.out.println("not implemented yet");
+                    break;
+                    
+                case MEAN_EMPLOYEECOUNT:
+                case MEDIAN_EMPLOYEECOUNT:
+                case MAX_EMPLOYEECOUNT:
+                case MIN_EMPLOYEECOUNT:
+                    System.out.println("not implemented yet");
+                    break;
+
+                case MEAN_QUANTITY:
+                case MEDIAN_QUANTITY:
+                case MAX_QUANTITY:
+                case MIN_QUANTITY:
+                    System.out.println("not implemented yet");
+                    break;
+
+                case MEAN_OPPS_PER_ACCOUNT:
+                case MEDIAN_OPPS_PER_ACCOUNT:
+                case MAX_OPPS_PER_ACCOUNT:
+                case MIN_OPPS_PER_ACCOUNT:
+                    System.out.println("not implemented yet");
+                    break;
+                    
                 case HELP:
                     printHelp();
                     break;

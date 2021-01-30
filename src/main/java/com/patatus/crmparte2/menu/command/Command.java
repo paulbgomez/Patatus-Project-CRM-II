@@ -1,23 +1,81 @@
 package com.patatus.crmparte2.menu.command;
 
+
 public enum Command {
     // List of available commands
-    UNKNOWN("UNKNOWN", 0),
-    NEW_LEAD(Keyword.NEW + " " + Keyword.LEAD, 0),
-    SHOW_LEADS(Keyword.SHOW + " " + Keyword.LEADS, 0),
-    SHOW_ACCOUNTS(Keyword.SHOW + " " + Keyword.ACCOUNTS, 0),
+    NEW_LEAD(Keyword.NEW + " " + Keyword.LEAD),
+    SHOW_LEADS(Keyword.SHOW + " " + Keyword.LEADS),
+    SHOW_ACCOUNTS(Keyword.SHOW + " " + Keyword.ACCOUNTS),
     LOOKUP_LEAD(Keyword.LOOKUP + " " + Keyword.LEAD, 1),
     CONVERT_LEAD(Keyword.CONVERT, 1),
     CLOSE_LOST_OPP(Keyword.CLOSE_LOST, 1),
     CLOSE_WON_OPP(Keyword.CLOSE_WON, 1),
+
+    NEW_SALESREP(Keyword.NEW + " " + Keyword.SALESREP),
+    SHOW_SALESREPS(Keyword.SHOW + " " + Keyword.SALESREPS),
+
+    REPORT_LEAD_BY_SALESREP(Keyword.REPORT_LEAD_BY + " " + Keyword.SALESREP),
+    REPORT_OPPORTUNITY_BY_SALESREP(Keyword.REPORT_OPPORTUNITY_BY + " " + Keyword.SALESREP),
+    REPORT_CLOSED_WON_BY_SALESREP(Keyword.REPORT_CLOSED_WON_BY + " " + Keyword.SALESREP),
+    REPORT_CLOSED_LOST_BY_SALESREP(Keyword.REPORT_CLOSED_LOST_BY + " " + Keyword.SALESREP),
+    REPORT_OPEN_BY_SALESREP(Keyword.REPORT_OPEN_BY + " " + Keyword.SALESREP),
+
+    REPORT_LEAD_BY_PRODUCT(Keyword.REPORT_LEAD_BY + " " + Keyword.PRODUCT),
+    REPORT_OPPORTUNITY_BY_PRODUCT(Keyword.REPORT_OPPORTUNITY_BY + " " + Keyword.PRODUCT),
+    REPORT_CLOSED_WON_BY_PRODUCT(Keyword.REPORT_CLOSED_WON_BY + " " + Keyword.PRODUCT),
+    REPORT_CLOSED_LOST_BY_PRODUCT(Keyword.REPORT_CLOSED_LOST_BY + " " + Keyword.PRODUCT),
+    REPORT_OPEN_BY_PRODUCT(Keyword.REPORT_OPEN_BY + " " + Keyword.PRODUCT),
+
+    REPORT_LEAD_BY_COUNTRY(Keyword.REPORT_LEAD_BY + " " + Keyword.COUNTRY),
+    REPORT_OPPORTUNITY_BY_COUNTRY(Keyword.REPORT_OPPORTUNITY_BY + " " + Keyword.COUNTRY),
+    REPORT_CLOSED_WON_BY_COUNTRY(Keyword.REPORT_CLOSED_WON_BY + " " + Keyword.COUNTRY),
+    REPORT_CLOSED_LOST_BY_COUNTRY(Keyword.REPORT_CLOSED_LOST_BY + " " + Keyword.COUNTRY),
+    REPORT_OPEN_BY_COUNTRY(Keyword.REPORT_OPEN_BY + " " + Keyword.COUNTRY),
+
+    REPORT_LEAD_BY_CITY(Keyword.REPORT_LEAD_BY + " " + Keyword.CITY),
+    REPORT_OPPORTUNITY_BY_CITY(Keyword.REPORT_OPPORTUNITY_BY + " " + Keyword.CITY),
+    REPORT_CLOSED_WON_BY_CITY(Keyword.REPORT_CLOSED_WON_BY + " " + Keyword.CITY),
+    REPORT_CLOSED_LOST_BY_CITY(Keyword.REPORT_CLOSED_LOST_BY + " " + Keyword.CITY),
+    REPORT_OPEN_BY_CITY(Keyword.REPORT_OPEN_BY + " " + Keyword.CITY),
+
+    REPORT_LEAD_BY_INDUSTRY(Keyword.REPORT_LEAD_BY + " " + Keyword.INDUSTRY),
+    REPORT_OPPORTUNITY_BY_INDUSTRY(Keyword.REPORT_OPPORTUNITY_BY + " " + Keyword.INDUSTRY),
+    REPORT_CLOSED_WON_BY_INDUSTRY(Keyword.REPORT_CLOSED_WON_BY + " " + Keyword.INDUSTRY),
+    REPORT_CLOSED_LOST_BY_INDUSTRY(Keyword.REPORT_CLOSED_LOST_BY + " " + Keyword.INDUSTRY),
+    REPORT_OPEN_BY_INDUSTRY(Keyword.REPORT_OPEN_BY + " " + Keyword.INDUSTRY),
+
+    MEAN_EMPLOYEECOUNT(Keyword.MEAN + " " + Keyword.EMPLOYEECOUNT),
+    MEDIAN_EMPLOYEECOUNT(Keyword.MEDIAN + " " + Keyword.EMPLOYEECOUNT),
+    MAX_EMPLOYEECOUNT(Keyword.MAX + " " + Keyword.EMPLOYEECOUNT),
+    MIN_EMPLOYEECOUNT(Keyword.MIN + " " + Keyword.EMPLOYEECOUNT),
+
+    MEAN_QUANTITY(Keyword.MEAN + " " + Keyword.QUANTITY),
+    MEDIAN_QUANTITY(Keyword.MEDIAN + " " + Keyword.QUANTITY),
+    MAX_QUANTITY(Keyword.MAX + " " + Keyword.QUANTITY),
+    MIN_QUANTITY(Keyword.MIN + " " + Keyword.QUANTITY),
+
+    MEAN_OPPS_PER_ACCOUNT(Keyword.MEAN + " " + Keyword.OPPS + Keyword.PER + Keyword.ACCOUNT),
+    MEDIAN_OPPS_PER_ACCOUNT(Keyword.MEDIAN + " " + Keyword.OPPS + Keyword.PER + Keyword.ACCOUNT),
+    MAX_OPPS_PER_ACCOUNT(Keyword.MAX + " " + Keyword.OPPS + Keyword.PER + Keyword.ACCOUNT),
+    MIN_OPPS_PER_ACCOUNT(Keyword.MIN + " " + Keyword.OPPS + Keyword.PER + Keyword.ACCOUNT),
+
     HELP(Keyword.HELP, 0),
-    EXIT(Keyword.EXIT, 0);
+    EXIT(Keyword.EXIT, 0),
+
+    UNKNOWN("UNKNOWN");
+
 
     // Properties
     private final String symbol;
     private final int nArgs;
 
     // -----------------Methods------------------
+
+    // Command constructor with symbol.
+    private Command(String symbol) {
+        this.symbol = symbol;
+        this.nArgs = 0;
+    }
 
     // Command constructor with symbol and number of arguments.
     private Command(String symbol, int nArgs) {
