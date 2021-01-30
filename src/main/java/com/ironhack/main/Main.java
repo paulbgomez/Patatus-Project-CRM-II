@@ -1,7 +1,7 @@
 package com.ironhack.main;
 
-import com.ironhack.main.menu.Menu;
-import com.ironhack.main.menu.MenuColors;
+import com.ironhack.model.menu.Menu;
+import com.ironhack.model.menu.MenuColors;
 
 public class Main {
     public static void main(String[] args) {
