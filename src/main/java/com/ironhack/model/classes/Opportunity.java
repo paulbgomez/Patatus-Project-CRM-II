@@ -12,6 +12,7 @@ public class Opportunity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int quantity;
+    @OneToOne
     private Contact decisionMaker;
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -19,13 +20,18 @@ public class Opportunity {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "sales_rep_id")
     private SalesRep repOpportunity;
+    @ManyToOne
+    private Account account;
 
     // To generate autoincrementID:
     private static int idGenerator = 0;
 
     //Constructor
+
+    public Opportunity() {
+    }
+
     public Opportunity(Contact decisionMaker, Product product, int quantity) {
         setId();
         setDecisionMaker(decisionMaker);
@@ -102,5 +108,21 @@ public class Opportunity {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public SalesRep getRepOpportunity() {
+        return repOpportunity;
+    }
+
+    public void setRepOpportunity(SalesRep repOpportunity) {
+        this.repOpportunity = repOpportunity;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

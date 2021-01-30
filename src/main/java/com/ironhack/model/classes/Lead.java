@@ -14,11 +14,13 @@ public class Lead {
     private String companyName;
 
     @ManyToOne
-    @JoinColumn(name = "sales_rep_id")
     private SalesRep repLead;
 
     // To generate autoincrementID:
     private static int idGenerator = 0;
+
+    public Lead() {
+    }
 
     // Constructor
     public Lead(String name, String phoneNumber, String email, String companyName) {
@@ -84,6 +86,14 @@ public class Lead {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public SalesRep getRepLead() {
+        return repLead;
+    }
+
+    public void setRepLead(SalesRep repLead) {
+        this.repLead = repLead;
     }
 }
 

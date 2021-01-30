@@ -48,4 +48,20 @@ public class SalesRep {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Lead> getRepLead() {
+        return repLead;
+    }
+
+    public void setRepLead(List<Lead> repLead) {
+        this.repLead = repLead;
+    }
+
+    public List<Opportunity> getRepOpportunity() {
+        return repOpportunity;
+    }
+
+    public void setRepOpportunity(List<Opportunity> repOpportunity) {
+        this.repOpportunity = repOpportunity;
+    }
 }

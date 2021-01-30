@@ -18,13 +18,19 @@ public class Account {
     private int employeeCount;
     private String city;
     private String country;
+    @OneToMany(mappedBy = "account")
     private List<Contact> contactList;
+    @OneToMany
     private List<Opportunity> opportunityList;
 
     // This is for the incremented self-generated id:
     private static int idGenerator = 0;
 
     // Constructor
+
+    public Account() {
+    }
+
     public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
         setId();
         setIndustry(industry);

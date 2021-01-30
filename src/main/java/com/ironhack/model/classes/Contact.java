@@ -1,9 +1,6 @@
 package com.ironhack.model.classes;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Contact {
@@ -16,8 +13,16 @@ public class Contact {
     private String email;
     private String companyName;
 
+    @ManyToOne
+    private Account account;
+    @OneToOne(mappedBy = "decisionMaker")
+    private Opportunity opportunity;
+
     // This is for the incremented self-generated id:
     private static int idGenerator = 0;
+
+    public Contact() {
+    }
 
     // Constructor:
     public Contact(String name, String phoneNumber, String email, String companyName) {
@@ -83,5 +88,21 @@ public class Contact {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Opportunity getOpportunity() {
+        return opportunity;
+    }
+
+    public void setOpportunity(Opportunity opportunity) {
+        this.opportunity = opportunity;
     }
 }
