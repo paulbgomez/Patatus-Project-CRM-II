@@ -77,3 +77,6 @@ fabric.properties
 */target/**
 target/**
 target/**/*.class
+
+# Application properties: cada uno el suyo (por el acceso a la DB)
+src/main/resources/application.properties
