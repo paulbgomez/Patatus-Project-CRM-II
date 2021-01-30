@@ -1,9 +1,6 @@
 package com.ironhack.model.classes;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class SalesRep {
@@ -12,6 +9,9 @@ public class SalesRep {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
+    @OneToOne
+
 
     // To generate autoincrementID:
     private static int idGenerator = 0;

@@ -18,6 +18,8 @@ public class Opportunity {
     @Enumerated(EnumType.STRING)
     private Product product;
 
+    @OneToOne
+
     // To generate autoincrementID:
     private static int idGenerator = 0;
 
