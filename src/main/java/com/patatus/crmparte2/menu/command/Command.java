@@ -68,19 +68,20 @@ public enum Command {
     // Properties
     private final String symbol;
     private final int nArgs;
+    private final int keywordCount;
 
     // -----------------Methods------------------
 
     // Command constructor with symbol.
     private Command(String symbol) {
-        this.symbol = symbol;
-        this.nArgs = 0;
+        this(symbol, 0);
     }
 
     // Command constructor with symbol and number of arguments.
     private Command(String symbol, int nArgs) {
         this.symbol = symbol;
         this.nArgs = nArgs;
+        this.keywordCount = this.symbol.split(" ").length;
     }
 
     // To get the symbol.
@@ -90,7 +91,7 @@ public enum Command {
 
     // To know the number of words that make up the command.
     private int keywordCount() {
-        return symbol.split(" ").length;
+        return this.keywordCount;
     }
 
     // To know the number of arguments it receives.
