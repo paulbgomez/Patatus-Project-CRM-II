@@ -1,4 +1,4 @@
-package com.ironhack.main.menu.command;
+package com.ironhack.model.menu.command;
 
 public class Keyword {
     // All the keywords you can use in the CRM system.

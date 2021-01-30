@@ -1,4 +1,4 @@
-package com.ironhack.main.menu.command;
+package com.ironhack.model.menu.command;
 
 public enum Command {
     // List of available commands
