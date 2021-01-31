@@ -1,6 +1,7 @@
 package com.patatus.crmparte2.model.classes;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "leads")
