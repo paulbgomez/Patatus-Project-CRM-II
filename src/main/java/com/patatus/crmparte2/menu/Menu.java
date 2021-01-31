@@ -16,12 +16,14 @@ public class Menu {
 
     // Location of help source.
     private static final String HELP_FILEPATH = "src/main/resources/.help";
+    // Location of script files directory.
+    private static final String SCRIPTS_DIR = "src/main/resources/scripts/";
 
     private final Controller controller = new Controller();
-    private final Scanner scanner = new Scanner(System.in);
+    //private final Scanner scanner = new Scanner(System.in);
 
     // Show main menu and takes you to each method according to the command type.
-    public void show(){
+    public void show(Scanner scanner){
 
         while (true) {
             System.out.print(USER_PROMPT);
@@ -36,9 +38,9 @@ public class Menu {
                     System.out.print("Name: ");
                     String name = scanner.nextLine().trim();
                     System.out.print("Phone number: ");
-                    String phoneNumber = readFormattedString("VALID phone number: ", "\\+?\\d{9,13}");
+                    String phoneNumber = readFormattedString(scanner,"VALID phone number: ", "\\+?\\d{9,13}");
                     System.out.print("Email address: ");
-                    String email =  readFormattedString("VALID email address: ", "[\\w-.]+@(?:[\\w-]+\\.)+[\\w-]+");
+                    String email =  readFormattedString(scanner,"VALID email address: ", "[\\w-.]+@(?:[\\w-]+\\.)+[\\w-]+");
                     System.out.print("Company name: ");
                     String companyName = scanner.nextLine().trim();
                     System.out.print("Are you sure all the data is ok? (Y || n): ");
@@ -74,7 +76,7 @@ public class Menu {
                     Product product = Product.get(productOption);
 
                     System.out.print("Quantity: ");
-                    int quantity = readNonNegativeInt("VALID Quantity: ");
+                    int quantity = readNonNegativeInt(scanner,"VALID Quantity: ");
 
                     String industryOption;
                     do {
@@ -84,7 +86,7 @@ public class Menu {
                     Industry industry = Industry.get(industryOption);
 
                     System.out.print("Number of employees: ");
-                    int employeeCount = readNonNegativeInt("VALID Number of employees: ");
+                    int employeeCount = readNonNegativeInt(scanner, "VALID Number of employees: ");
                     System.out.print("City: ");
                     String city = scanner.nextLine().trim();
                     System.out.print("Country: ");
@@ -181,6 +183,12 @@ public class Menu {
                     printUnknownCommand(userInput);
                     break;
 
+                case RUN:
+                    try {
+                        String scriptfile = command.getStringArg(inputArgs);
+                        show(new Scanner(new File(SCRIPTS_DIR + scriptfile)));
+                    } catch (Exception e) {};
+                    break;
                 case EXIT:
                     System.out.println("talué!");
                 default:
@@ -200,7 +208,7 @@ public class Menu {
     }
 
     // Method to check that the string that is needed has the required format.
-    private String readFormattedString(String onBadInput, String regex) {
+    private String readFormattedString(Scanner scanner, String onBadInput, String regex) {
         String input;
         int c = 0;
         while (true) {
@@ -219,7 +227,7 @@ public class Menu {
     }
 
     // Method to verify that the user does not enter a negative number
-    private int readNonNegativeInt(String onBadInput) {
+    private int readNonNegativeInt(Scanner scanner, String onBadInput) {
         int n = -1;
         int c = 0;
         while (n < 0) {

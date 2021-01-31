@@ -62,6 +62,8 @@ public enum Command {
     HELP(Keyword.HELP),
     EXIT(Keyword.EXIT),
 
+    RUN(Keyword.RUN, 1),
+
     UNKNOWN("UNKNOWN");
 
 
@@ -107,9 +109,13 @@ public enum Command {
         return this.nArgs > 0;
     }
 
-    // To read the argument.
+    // To read the int argument.
     public int getArg(String[] inputArgs) {
         return Integer.parseInt(inputArgs[length() - 1]);
+    }
+
+    public String getStringArg(String[] inputArgs) {
+        return inputArgs[length() - 1];
     }
 
     // Method to get a command from the users input.
@@ -130,7 +136,10 @@ public enum Command {
                 if (normalizedInput.startsWith(command.getSymbol()) &&
                     inputArgs.length == command.length()) {
                     if (command.hasArgs())
-                        command.getArg(inputArgs);
+                        if (!command.equals(Command.RUN))
+                            command.getArg(inputArgs);
+                        else
+                            command.getStringArg(inputArgs);
                     return command;
                 }
             }

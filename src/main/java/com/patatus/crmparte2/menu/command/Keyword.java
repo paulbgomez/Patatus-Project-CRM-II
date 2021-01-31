@@ -34,6 +34,7 @@ public class Keyword {
     public static final String ACCOUNT = "ACCOUNT";
     public static final String HELP = "HELP";
     public static final String EXIT = "EXIT";
+    public static final String RUN = "RUN";
 
     // combinations of keywords
     static final String REPORT_LEAD_BY = REPORT + " " + LEAD + " " + BY;
