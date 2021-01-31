@@ -1,8 +1,8 @@
 package com.patatus.crmparte2.repository;
 
 import com.patatus.crmparte2.model.classes.*;
-import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
+import com.patatus.crmparte2.model.enums.Status;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,18 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class SalesRepRepositoryTest {
-
-    /* He hecho estos tests para comprobar que la DB va funcionando. He probado a obtener un SalesRep por lead,
-    por producto de una opportunity etc.
-    No son test que tengan que quedar en el futuro, pero han servido para comprobar el funcionamiento.
-    Falta añadir Account a toda esta mierda, modificando también el constructor de Opportunity. */
-
 
     @Autowired
     SalesRepRepository salesRepRepository;
@@ -31,47 +24,36 @@ public class SalesRepRepositoryTest {
     ContactRepository contactRepository;
     @Autowired
     OpportunityRepository opportunityRepository;
-    @Autowired
-    AccountRepository accountRepository;
 
     @BeforeEach
     public void setUp() {
         SalesRep salesRep1 = salesRepRepository.save(new SalesRep("Pepe"));
         SalesRep salesRep2 = salesRepRepository.save(new SalesRep("Juan"));
 
-        Lead lead1 = leadRepository.save(new Lead("bla", "916726410", "bla@wuw.com", "wuw", salesRep1));
-        Lead lead2 = leadRepository.save(new Lead("ble", "62913665", "ble@wow.com", "wow", salesRep1));
-        Lead lead3 = leadRepository.save(new Lead("bli", "676208814", "bli@wiw.com", "wiw", salesRep2));
+        Lead lead1 = leadRepository.save(new Lead("María", "916726410", "maria@transportesmaria.com", "Transportes María", salesRep1));
+        Lead lead2 = leadRepository.save(new Lead("Antonio", "62913665", "antonio@antruck.com", "Antruck S.L.", salesRep1));
+        Lead lead3 = leadRepository.save(new Lead("Sonia", "676208814", "sonia@wowpackages.com", "Wow Packages!", salesRep2));
 
-        Contact contact1 = contactRepository.save(new Contact("bla", "916726410", "bla@wuw.com", "wuw"));
+        Contact contact1 = contactRepository.save(new Contact("María", "916726410", "maria@transportesmaria.com", "Transportes María"));
+        Contact contact2 = contactRepository.save(new Contact("Antonio", "62913665", "antonio@antruck.com", "Antruck S.L."));
+        Contact contact3 = contactRepository.save(new Contact("Sonia", "676208814", "sonia@wowpackages.com", "Wow Packages!"));
 
-        Opportunity opportunity1 = opportunityRepository.save(new Opportunity(contact1, Product.BOX, 10, salesRep1));
-        Account account1 = accountRepository.save(new Account(Industry.PRODUCE, 10, "Madrid", "Europe", List.of(contact1), List.of(opportunity1)));
-
-        // ESTO FURULA EN EL TEST PERO HAY QUE REVISAR LAS RELACIONES.
-//        Account account1 = accountRepository.save(new Account(Industry.PRODUCE, 10, "Madrid", "Europe"));
-//        Opportunity opportunity1 = opportunityRepository.save(new Opportunity(contact1, Product.BOX, 10, salesRep1, account1));
-
-
-
-        /* TODO: Esto de añadir así leads y oportunidades a las listas de los ManyToOne, habría que pensarlo para la app en producción:
-            Es decir, en realidad al crear un lead habría que mandar ese lead a la lista de su salesRep.
-        */
-        salesRep1.setRepLead(List.of(lead1, lead2));
-        salesRep2.setRepLead(List.of(lead3));
-        salesRep1.setRepOpportunity(List.of(opportunity1));
+        Opportunity opportunity1 = opportunityRepository.save(new Opportunity(contact1, Product.BOX, 5, salesRep1));
+        Opportunity opportunity2 = opportunityRepository.save(new Opportunity(contact2, Product.FLATBED, 4, salesRep1));
+        Opportunity opportunity3 = new Opportunity(contact3, Product.HYBRID, 3, salesRep2);
+        opportunity3.closeWon();
+        opportunityRepository.save(opportunity3);
     }
 
     @AfterEach
     public void tearDown() {
-        accountRepository.deleteAll();
         opportunityRepository.deleteAll();
-        // accountRepository.deleteAll(); si metemos el account en el constructor del opportunity, hace falta que este delete vaya después del de opportunity.
         contactRepository.deleteAll();
         leadRepository.deleteAll();
         salesRepRepository.deleteAll();
     }
 
+    // General test to check if everything is working properly.
     @Test
     public void findAll() {
         // SalesRep:
@@ -81,56 +63,49 @@ public class SalesRepRepositoryTest {
         // Leads:
         List<Lead> leadList = leadRepository.findAll();
         assertEquals(3, leadList.size());
-        assertEquals("bla", leadList.get(0).getName());
+        assertEquals("María", leadList.get(0).getName());
         // Opportunities:
         List<Opportunity> opportunityList = opportunityRepository.findAll();
-        assertEquals(1, opportunityList.size());
-        assertEquals(10, opportunityList.get(0).getQuantity());
-        // Accounts:
-//        List<Account> accountList = accountRepository.findAll();
-//        assertEquals(1, accountList.size());
-//        assertEquals(Industry.PRODUCE, accountList.get(0).getIndustry());
-
+        assertEquals(3, opportunityList.size());
+        assertEquals(5, opportunityList.get(0).getQuantity());
     }
 
+    // To know what the following tests are checking, see SalesRepRepository class.
     @Test
-    public void findSalesRepWithLeadsByName_ValidSalesRepName_RightSalesRepWithLeads() {
-        Optional<SalesRep> salesRep = salesRepRepository.findSalesRepWithLeadsByName("Pepe");
-        if (salesRep.isPresent()) {
-            assertEquals("bla", salesRep.get().getRepLead().get(0).getName());
-        } else {
-            fail("not present");
-        }
+    public void findLeadCountBySalesRep() {
+        List<Object[]> leadCountBySalesRep = salesRepRepository.findLeadCountBySalesRep();
+        assertEquals(2, leadCountBySalesRep.size());
+        assertEquals(leadCountBySalesRep.get(0)[0],"Pepe");
+        assertEquals(leadCountBySalesRep.get(0)[1],2L);
+        assertEquals(leadCountBySalesRep.get(1)[0],"Juan");
+        assertEquals(leadCountBySalesRep.get(1)[1],1L);
     }
-
     @Test
-    public void findSalesRepByLeadName_ValidLeadName_RightSalesRep(){
-        Optional<SalesRep> salesRep = salesRepRepository.findSalesRepByLeadName("bli");
-        if (salesRep.isPresent()) {
-            assertEquals("Juan", salesRep.get().getName());
-        } else {
-            fail("not present");
-        }
+    public void findOpportunityCountBySalesRep() {
+        List<Object[]> opportunityCountBySalesRep = salesRepRepository.findOpportunityCountBySalesRep();
+        assertEquals(2, opportunityCountBySalesRep.size());
+        assertEquals(opportunityCountBySalesRep.get(0)[0],"Pepe");
+        assertEquals(opportunityCountBySalesRep.get(0)[1],2L);
+        assertEquals(opportunityCountBySalesRep.get(1)[0],"Juan");
+        assertEquals(opportunityCountBySalesRep.get(1)[1],1L);
     }
-
     @Test
-    public void findSalesRepByProduct_ValidProduct_RightSalesRep() {
-        Optional<SalesRep> salesRep = salesRepRepository.findSalesRepByProduct(Product.BOX);
-        if (salesRep.isPresent()) {
-            assertEquals("Pepe", salesRep.get().getName());
-        } else {
-            fail("not present");
-        }
+    public void findOpportunityByStatusCountBySalesRep_CLOSEDWON_0() {
+        List<Object[]> closedWonCountBySalesRep = salesRepRepository.findOpportunityByStatusCountBySalesRep(Status.CLOSED_WON);
+        assertEquals(1, closedWonCountBySalesRep.size());
+        assertEquals(closedWonCountBySalesRep.get(0)[0],"Juan");
+        assertEquals(closedWonCountBySalesRep.get(0)[1],1L);
     }
-
-//    @Test
-//    public void findSalesRepByCityOfAccount_ValidCity_RightSalesRep(){
-//        Optional<List<SalesRep>> salesRep = salesRepRepository.findSalesRepByCityOfAccount("Madrid");
-//        if (salesRep.isPresent()) {
-//            assertEquals("Pepe", salesRep.get().get(0).getName());
-//            System.out.println(salesRep.get().get(0).getName() + " tiene un account con ciudad " + salesRep.get().get(0).getRepOpportunity().get(0).getAccount().getCity());
-//        } else {
-//            fail("not present");
-//        }
-//    }
+    @Test
+    public void findOpportunityByStatusCountBySalesRep_CLOSEDLOST_0() {
+        List<Object[]> closedLostCountBySalesRep = salesRepRepository.findOpportunityByStatusCountBySalesRep(Status.CLOSED_LOST);
+        assertEquals(0, closedLostCountBySalesRep.size());
+    }
+    @Test
+    public void findOpportunityByStatusCountBySalesRep_OPEN_1() {
+        List<Object[]> openCountBySalesRep = salesRepRepository.findOpportunityByStatusCountBySalesRep(Status.OPEN);
+        assertEquals(1, openCountBySalesRep.size());
+        assertEquals(openCountBySalesRep.get(0)[0], "Pepe");
+        assertEquals(openCountBySalesRep.get(0)[1], 2L);
+    }
 }

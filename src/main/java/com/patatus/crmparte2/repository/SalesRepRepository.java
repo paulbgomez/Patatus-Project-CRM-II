@@ -1,31 +1,27 @@
 package com.patatus.crmparte2.repository;
 
 import com.patatus.crmparte2.model.classes.SalesRep;
-import com.patatus.crmparte2.model.enums.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface SalesRepRepository extends JpaRepository<SalesRep, Integer> {
+    // 1. A count of Leads by SalesRep can be displayed by typing "Report Lead by SalesRep"
+        @Query("SELECT s.name,COUNT(l) FROM SalesRep s JOIN s.repLead l GROUP BY s")
+        public List<Object[]> findLeadCountBySalesRep();
 
+    // 2. A count of all Opportunities by SalesRep can be displayed by typing "Report Opportunity by SalesRep"
+        @Query("SELECT s.name,COUNT(o) FROM SalesRep s LEFT JOIN s.repOpportunity o GROUP BY s")
+        public List<Object[]> findOpportunityCountBySalesRep();
 
-    // He hecho estas pequeñas pruebas para comprobar que funcionaba la DB:
-
-    @Query("SELECT s FROM SalesRep s JOIN FETCH s.repLead WHERE s.name = :name")
-    public Optional<SalesRep> findSalesRepWithLeadsByName(@Param("name") String name);
-
-    @Query("SELECT s FROM SalesRep s JOIN FETCH s.repLead l WHERE l.name = :leadName")
-    public Optional<SalesRep> findSalesRepByLeadName(@Param("leadName") String leadName);
-
-    @Query("SELECT s FROM SalesRep s JOIN FETCH s.repOpportunity o WHERE o.product = :product")
-    public Optional<SalesRep> findSalesRepByProduct(@Param("product") Product product);
-
-    // ESTO FURULA PERO HAY QUE REVISAR LAS RELACIONES ENTRE ACCOUNT Y OPPORTUNITY
-//    @Query("SELECT s FROM SalesRep s JOIN FETCH s.repOpportunity o JOIN FETCH o.account a WHERE a.city = :city")
-//    public Optional<List<SalesRep>> findSalesRepByCityOfAccount(@Param("city") String city);
+    // 3. A count of all CLOSED_WON Opportunities by SalesRep can be displayed by typing "Report CLOSED-WON by SalesRep"
+    // 4. A count of all CLOSED_LOST Opportunities by SalesRep can be displayed by typing "Report CLOSED-LOST by SalesRep"
+    // 5. A count of all OPEN Opportunities by SalesRep can be displayed by typing "Report OPEN by SalesRep"
+    // The last three lines are checked with only one query, using status as a parameter.
+        @Query("SELECT s.name,COUNT(cwo) FROM SalesRep s LEFT JOIN s.repOpportunity cwo WHERE cwo.status = :status GROUP BY s")
+        public List<Object[]> findOpportunityByStatusCountBySalesRep(@Param("status")Enum status);
 }
