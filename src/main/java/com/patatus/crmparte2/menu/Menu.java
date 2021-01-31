@@ -184,10 +184,12 @@ public class Menu {
                     break;
 
                 case RUN:
+                    String scriptFilename = command.getStringArg(inputArgs);
                     try {
-                        String scriptfile = command.getStringArg(inputArgs);
-                        show(new Scanner(new File(SCRIPTS_DIR + scriptfile)));
-                    } catch (Exception e) {};
+                        show(new Scanner(new File(SCRIPTS_DIR + scriptFilename)));
+                    } catch (Exception e) {
+                        printFileNotFound(scriptFilename);
+                    };
                     break;
                 case EXIT:
                     System.out.println("talué!");
@@ -199,7 +201,11 @@ public class Menu {
 
     // This method allows us to normalize the user's input and obtain their arguments.
     private String[] getArgsFromInput(String userInput) {
-        return userInput.toUpperCase().trim().split(" +");
+        String[] values = userInput.toUpperCase().trim().split(" +");
+        // if the command is RUN, the script filename must remain (not applying toUppercase())
+        if (values[0].equals(Command.RUN.name()))
+            values[values.length-1] = userInput.trim().split(" +")[values.length-1];
+        return values;
     }
 
     // Method to check if a command is valid or not.
@@ -268,5 +274,10 @@ public class Menu {
     private void printUnknownCommand(String userInput) {
         //System.out.println(MenuColors.setColorRed("'" + userInput + "' is not a valid command."));
         System.out.println("'" + userInput + "' is not a valid command.");
+    }
+
+    // Displays an error message when a script file is not found.
+    private void printFileNotFound(String filename) {
+        System.out.println("'" + filename + "' file not found.");
     }
 }
