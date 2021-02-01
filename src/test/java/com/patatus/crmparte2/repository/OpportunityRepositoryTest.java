@@ -77,11 +77,10 @@ class OpportunityRepositoryTest {
     @Test
     public void findMaxQuantityBySalesRep_salesRepName_MaxQuantity(){
         List<Object[]> opportunityOptional = opportunityRepository.findMaxQuantityByRepContainingName();
-        for (Object[] object: opportunityOptional) {
-            System.out.println("Name: " + object[0] + " Max: " + object[1] + "\n");
-        }
-        assertEquals(70, opportunityOptional.get(0)[1]);
+        System.out.println(opportunityOptional.size());
+        assertEquals(100, opportunityOptional.get(0)[1]);
     }
+    
 
     @Test
     public void findMaxQuantity_OpportunityList_MaxQuantity(){

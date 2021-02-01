@@ -12,7 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface OpportunityRepository extends JpaRepository<Opportunity, Integer> {
-    @Query("SELECT s.name, MAX(o.quantity) FROM Opportunity o INNER JOIN o.repOpportunity s GROUP BY s.name")
+
+    @Query(value="SELECT s.name, o.quantity FROM opportunity o INNER JOIN sales_rep s ON o.rep_opportunity_id = s.id ORDER BY o.quantity DESC LIMIT 1", nativeQuery = true)
     public List<Object[]> findMaxQuantityByRepContainingName ();
 
     @Query("SELECT MAX(o.quantity) FROM Opportunity o ")
