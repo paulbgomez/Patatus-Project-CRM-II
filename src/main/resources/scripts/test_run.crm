@@ -1,0 +1,4 @@
+run test.crm
+run test2.crm
+run test3.crm
+exit
