@@ -71,13 +71,12 @@ class OpportunityRepositoryTest {
     @Test
     public void findAll(){
         List<Opportunity> opportunityOptional = opportunityRepository.findAll();
-        assertEquals(2, opportunityOptional.size());
+        assertEquals(4, opportunityOptional.size());
     }
 
     @Test
-    public void findMaxQuantityBySalesRep_salesRepName_MaxQuantity(){
+    public void findMaxQuantityByRepContainingName(){
         List<Object[]> opportunityOptional = opportunityRepository.findMaxQuantityByRepContainingName();
-        System.out.println(opportunityOptional.size());
         assertEquals(100, opportunityOptional.get(0)[1]);
     }
     
@@ -85,14 +84,14 @@ class OpportunityRepositoryTest {
     @Test
     public void findMaxQuantity_OpportunityList_MaxQuantity(){
         Integer opportunityOptional = opportunityRepository.findMaxQuantityFromOpportunities();
-        assertEquals(70, opportunityOptional);
+        assertEquals(100, opportunityOptional);
     }
 
 
     @Test
     public void findMaxQuantity_OpportunityWonList_MaxQuantity(){
         Integer opportunityOptional = opportunityRepository.findMaxQuantityFromWonOpportunities(Status.OPEN);
-        assertEquals(70, opportunityOptional);
+        assertEquals(100, opportunityOptional);
     }
 
     @Test
@@ -101,11 +100,16 @@ class OpportunityRepositoryTest {
         assertEquals(10, opportunityOptional);
     }
 
-
     @Test
     public void findMinQuantity_OpportunityWonList_MaxQuantity(){
         Integer opportunityOptional = opportunityRepository.findMinQuantityFromWonOpportunities(Status.OPEN);
         assertEquals(10, opportunityOptional);
+    }
+
+    @Test
+    public void findMinQuantityByRepContainingName(){
+        List<Object[]> opportunityOptional = opportunityRepository.findMinQuantityByRepContainingName();
+        assertEquals(10, opportunityOptional.get(0)[1]);
     }
 
 

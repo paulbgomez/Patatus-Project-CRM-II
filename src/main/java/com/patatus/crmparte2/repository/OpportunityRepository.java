@@ -27,4 +27,8 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
 
     @Query("SELECT MIN(o.quantity) FROM Opportunity o WHERE o.status = :status")
     public Integer findMinQuantityFromWonOpportunities (@Param("status") Enum status);
+
+    @Query(value="SELECT s.name, o.quantity FROM opportunity o INNER JOIN sales_rep s ON o.rep_opportunity_id = s.id ORDER BY o.quantity ASC LIMIT 1", nativeQuery = true)
+    public List<Object[]> findMinQuantityByRepContainingName ();
+
 }
