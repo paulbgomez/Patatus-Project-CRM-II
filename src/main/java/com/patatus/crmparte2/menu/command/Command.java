@@ -133,15 +133,27 @@ public enum Command {
                 // skip the generic unknown command
                 if (command.equals(UNKNOWN)) continue;
 
-                if (normalizedInput.startsWith(command.getSymbol()) &&
-                    inputArgs.length == command.length()) {
-                    if (command.hasArgs())
-                        if (!command.equals(Command.RUN))
-                            command.getArg(inputArgs);
-                        else
-                            command.getStringArg(inputArgs);
-                    return command;
+                // skip if command length != inputArgs length
+                if (command.length() != inputArgs.length) continue;
+
+                // loop to check if input matches command
+                boolean isMatch = true;
+                String[] commandKeywords = command.getSymbol().split(" ");
+                for(int i=0; i<commandKeywords.length; i++) {
+                    isMatch = isMatch && commandKeywords[i].equals(inputArgs[i]);
+                    if (!isMatch) break; // break the loop
                 }
+                if (!isMatch) continue; // try next command
+
+                // try to get args if required
+                if (command.hasArgs())
+                    if (!command.equals(Command.RUN))
+                        // get int arg
+                        command.getArg(inputArgs);
+                    else
+                        // get string arg
+                        command.getStringArg(inputArgs);
+                return command;
             }
         }
         catch (Exception e) {
