@@ -42,8 +42,6 @@ class OpportunityRepositoryTest {
                 new Lead("bli", "676208814", "bli@wiw.com", "wiw", salesRepList.get(2))
         ));
 
-        Account account = new Account(Industry.ECOMMERCE, 7, "citycitycitycity", "Españita");
-
         List<Contact> contacts = contactRepository.saveAll(List.of(
                 new Contact("bla", "916726410", "bla@wuw.com", "wuw"),
                 new Contact("bla", "916726410", "bla@wuw.com", "wuw"),
@@ -51,6 +49,9 @@ class OpportunityRepositoryTest {
                 new Contact("bla", "916726410", "bla@wuw.com", "wuw"),
                 new Contact("bla", "916726410", "bla@wuw.com", "wuw")
         ));
+
+        Account account = new Account(Industry.ECOMMERCE, 20, "Detroit", "USA");
+
 
         List<Opportunity> opportunityList = opportunityRepository.saveAll(List.of(
                 new Opportunity(contacts.get(0), Product.BOX, 10, salesRepList.get(0), account),
@@ -81,7 +82,7 @@ class OpportunityRepositoryTest {
         List<Object[]> opportunityOptional = opportunityRepository.findMaxQuantityByRepContainingName();
         assertEquals(100, opportunityOptional.get(0)[1]);
     }
-    
+
 
     @Test
     public void findMaxQuantity_OpportunityList_MaxQuantity(){
@@ -114,7 +115,10 @@ class OpportunityRepositoryTest {
         assertEquals(10, opportunityOptional.get(0)[1]);
     }
 
-
-
+    @Test
+    public void findMedianFromOpportunities(){
+        Integer median = opportunityRepository.findMedianFromOpportunities();
+        assertEquals(70, median);
+    }
 
 }
