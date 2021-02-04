@@ -64,4 +64,37 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
     // TODO HACER TEST
     @Query("SELECT a.country, COUNT(o.id) FROM Opportunity o RIGHT JOIN o.account a GROUP BY a.country")
     List<Object[]> findOpportunitiesByCountry();
+
+    // A count of all CLOSED_WON Opportunities by country can be displayed by typing "Report CLOSED-WON by Country"
+    // A count of all CLOSED_LOST Opportunities by country can be displayed by typing "Report CLOSED-LOST by Country"
+    // A count of all OPEN Opportunities by country can be displayed by typing "Report OPEN by Country"
+    // TODO HACER TEST
+    @Query("SELECT a.country, COUNT(o.id) FROM Opportunity o RIGHT JOIN o.account a WHERE o.status=:status GROUP BY a.country")
+    List<Object[]> findByCountryAndStatus(@Param("status") Enum status);
+
+    // A count of all Opportunities by city can be displayed by typing "Report Opportunity by City"
+    // TODO HACER TEST
+    @Query("SELECT a.city, COUNT(o.id) FROM Opportunity o RIGHT JOIN o.account a GROUP BY a.country")
+    List<Object[]> findOpportunitiesByCity();
+
+    // A count of all CLOSED_WON Opportunities by city can be displayed by typing "Report CLOSED-WON by City"
+    // A count of all CLOSED_LOST Opportunities by city can be displayed by typing "Report CLOSED-LOST by City"
+    // A count of all OPEN Opportunities by city can be displayed by typing "Report OPEN by City"
+    // TODO HACER TEST
+    @Query("SELECT a.city, COUNT(o.id) FROM Opportunity o RIGHT JOIN o.account a WHERE o.status=:status GROUP BY a.city")
+    List<Object[]> findByCityAndStatus(@Param("status") Enum status);
+
+    // A count of all Opportunities by industry can be displayed by typing "Report Opportunity by Industry"
+    // TODO HACER TEST
+    @Query("SELECT a.industry, COUNT(o.id) FROM Opportunity o RIGHT JOIN o.account a GROUP BY a.industry")
+    List<Object[]> findOpportunitiesByIndustry();
+
+    // A count of all CLOSED_WON Opportunities by industry can be displayed by typing "Report CLOSED-WON by Industry"
+    // A count of all CLOSED_LOST Opportunities by industry can be displayed by typing "Report CLOSED-LOST by Industry"
+    // A count of all OPEN Opportunities by industry can be displayed by typing "Report OPEN by Industry"
+    // TODO HACER TEST
+    @Query("SELECT a.industry, COUNT(o.id) FROM Opportunity o RIGHT JOIN o.account a WHERE o.status=:status GROUP BY a.industry")
+    List<Object[]> findByIndustryAndStatus(@Param("status") Enum status);
+
+
 }
