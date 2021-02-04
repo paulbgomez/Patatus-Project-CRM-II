@@ -39,13 +39,15 @@ public class Menu {
             switch(command) {
                 case NEW_LEAD:
                     System.out.print("Name: ");
-                    String name = scanner.nextLine().trim();
+                    //String name = scanner.nextLine().trim();
+                    String name = readNonEmptyString(scanner, "VALID name: ");
                     System.out.print("Phone number: ");
                     String phoneNumber = readFormattedString(scanner,"VALID phone number: ", "\\+?\\d{9,13}");
                     System.out.print("Email address: ");
                     String email =  readFormattedString(scanner,"VALID email address: ", "[\\w-.]+@(?:[\\w-]+\\.)+[\\w-]+");
                     System.out.print("Company name: ");
-                    String companyName = scanner.nextLine().trim();
+                    //String companyName = scanner.nextLine().trim();
+                    String companyName = readNonEmptyString(scanner,"VALID company name: ");
                     SalesRep repLead = readAndFindSalesRep(scanner);
                     System.out.print("Are you sure all the data is ok? (Y || n): ");
                     if (scanner.nextLine().equalsIgnoreCase("Y")){
@@ -92,9 +94,11 @@ public class Menu {
                     System.out.print("Number of employees: ");
                     int employeeCount = readNonNegativeInt(scanner, "VALID Number of employees: ");
                     System.out.print("City: ");
-                    String city = scanner.nextLine().trim();
+                    //String city = scanner.nextLine().trim();
+                    String city = readNonEmptyString(scanner, "VALID City: ");
                     System.out.print("Country: ");
-                    String country = scanner.nextLine().trim();
+                    //String country = scanner.nextLine().trim();
+                    String country = readNonEmptyString(scanner, "VALID Country: ");
 
                     System.out.println(controller.convertLead(idToConvert, product, quantity, industry, employeeCount, city, country));
                     break;
@@ -115,7 +119,8 @@ public class Menu {
 
                 case NEW_SALESREP:
                     System.out.print("Name: ");
-                    String salesRepName = scanner.nextLine().trim();
+                    //String salesRepName = scanner.nextLine().trim();
+                    String salesRepName = readNonEmptyString(scanner, "VALID Name: ");
                     System.out.println(controller.newSalesRep(salesRepName));
                     break;
                 case SHOW_SALESREPS:
@@ -281,6 +286,26 @@ public class Menu {
             System.out.println("POR FIN");
         return n;
     }
+
+    // Method to check that the string that is needed is not empty.
+    private String readNonEmptyString(Scanner scanner, String onBadInput) {
+        String input;
+        int c = 0;
+        while (true) {
+            input = scanner.nextLine().trim();
+            if (!input.isBlank())
+                break;
+            c++;
+            if (c%3 == 0) {
+                onBadInput = "Porfa, deja de vacilarme TT.TT\n" + onBadInput; // cada 3 inputs malos se frustra más
+            }
+            System.out.print(onBadInput);
+        }
+        if (c > 3)
+            System.out.println("POR FIN");
+        return input;
+    }
+
 
     // Method to show, at any time, the commands that the user has at his disposal.
     private void printHelp() {
