@@ -22,6 +22,6 @@ public interface SalesRepRepository extends JpaRepository<SalesRep, Integer> {
     // 4. A count of all CLOSED_LOST Opportunities by SalesRep can be displayed by typing "Report CLOSED-LOST by SalesRep"
     // 5. A count of all OPEN Opportunities by SalesRep can be displayed by typing "Report OPEN by SalesRep"
     // The last three lines are checked with only one query, using status as a parameter.
-        @Query("SELECT s.name,COUNT(cwo) FROM SalesRep s LEFT JOIN s.repOpportunity cwo WHERE cwo.status = :status GROUP BY s")
+        @Query("SELECT s.name,COUNT(o) FROM SalesRep s LEFT JOIN s.repOpportunity o WHERE o.status = :status GROUP BY s")
         public List<Object[]> findOpportunityByStatusCountBySalesRep(@Param("status")Enum status);
 }

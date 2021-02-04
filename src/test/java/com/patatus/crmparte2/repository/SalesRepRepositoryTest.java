@@ -76,7 +76,7 @@ public class SalesRepRepositoryTest {
         assertEquals(5, opportunityList.get(0).getQuantity());
         // Account:
         List<Account> accountList = accountRepository.findAll();
-        assertEquals(2, opportunityList.size());
+        assertEquals(3, opportunityList.size());
         assertEquals(20, accountList.get(0).getEmployeeCount());
     }
 

@@ -55,12 +55,10 @@ public class SalesRep {
     public void setRepOpportunity(List<Opportunity> repOpportunity) {
         this.repOpportunity = repOpportunity;
     }
-
+    
     @Override
     public String toString() {
-        return "SalesRep{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "ID-" + id +
+                " | name: " + name;
     }
 }
