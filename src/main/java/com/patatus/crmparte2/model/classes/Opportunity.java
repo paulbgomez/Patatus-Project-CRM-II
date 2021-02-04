@@ -30,7 +30,20 @@ public class Opportunity {
     // Constructors:
     public Opportunity() {
     }
+
+    // constructur definitivo versión final está vez sí
+    public Opportunity(Contact decisionMaker, Product product, int quantity, SalesRep repOpportunity, Account account) {
+        setId();
+        setDecisionMaker(decisionMaker);
+        status = Status.OPEN;
+        setProduct(product);
+        setQuantity(quantity);
+        setRepOpportunity(repOpportunity);
+        setAccount(account);
+    }
+
     // Este constructor añade SalesRep, para las pruebas de la  BD. Se queda así de momento. Habría que añadir el Account también.
+    @Deprecated
     public Opportunity(Contact decisionMaker, Product product, int quantity, SalesRep repOpportunity) {
         setId();
         setDecisionMaker(decisionMaker);
@@ -50,6 +63,7 @@ public class Opportunity {
 //        setAccount(account);
 //    }
         // Este es el constructor viejo, sin SalesRep, para el programa tal como estaba. Se queda así de momento.
+    @Deprecated
     public Opportunity(Contact decisionMaker, Product product, int quantity) {
         setId();
         setDecisionMaker(decisionMaker);

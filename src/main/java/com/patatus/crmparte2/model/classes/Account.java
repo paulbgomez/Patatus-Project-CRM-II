@@ -38,10 +38,11 @@ public class Account {
         setEmployeeCount(employeeCount);
         setCity(city);
         setCountry(country);
-        setContactList(new ArrayList<Contact>());
-        setOpportunityList(new ArrayList<Opportunity>());
+        setContactList(new ArrayList<>());
+        setOpportunityList(new ArrayList<>());
     }
 
+    @Deprecated
     public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
         setId();
         setIndustry(industry);

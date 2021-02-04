@@ -4,11 +4,13 @@ import com.patatus.crmparte2.menu.command.Command;
 import com.patatus.crmparte2.controller.Controller;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.*;
 
-
+@Service
 public class Menu {
     // Properties
     // To display the prompt in yellow.
@@ -19,7 +21,8 @@ public class Menu {
     // Location of script files directory.
     private static final String SCRIPTS_DIR = "src/main/resources/scripts/";
 
-    private final Controller controller = new Controller();
+    @Autowired
+    private Controller controller;
     //private final Scanner scanner = new Scanner(System.in);
 
     // Show main menu and takes you to each method according to the command type.
@@ -189,7 +192,7 @@ public class Menu {
                         show(new Scanner(new File(SCRIPTS_DIR + scriptFilename)));
                     } catch (Exception e) {
                         printFileNotFound(scriptFilename);
-                    };
+                    }
                     break;
                 case EXIT:
                     System.out.println("talué!");

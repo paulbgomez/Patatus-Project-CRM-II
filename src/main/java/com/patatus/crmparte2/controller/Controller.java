@@ -1,17 +1,30 @@
 package com.patatus.crmparte2.controller;
 
-import com.patatus.crmparte2.model.classes.Account;
-import com.patatus.crmparte2.model.classes.Contact;
-import com.patatus.crmparte2.model.classes.Lead;
-import com.patatus.crmparte2.model.classes.Opportunity;
+import com.patatus.crmparte2.model.classes.*;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
+import com.patatus.crmparte2.repository.AccountRepository;
+import com.patatus.crmparte2.repository.ContactRepository;
+import com.patatus.crmparte2.repository.OpportunityRepository;
+import com.patatus.crmparte2.repository.SalesRepRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Service
 public class Controller {
+    @Autowired
+    AccountRepository accountRepository;
+    @Autowired
+    OpportunityRepository opportunityRepository;
+    @Autowired
+    SalesRepRepository salesRepRepository;
+    @Autowired
+    ContactRepository contactRepository;
 
     private final Map<Integer, Lead> leadMap = new HashMap<>();
     private final Map<Integer, Account> accountMap = new HashMap<>();
@@ -19,6 +32,7 @@ public class Controller {
 
     // Method in which we ask the user for the necessary data to create a lead, and the we create a new lead.
     public String newLead(String name, String phoneNumber, String email, String companyName) {
+        //TODO: crear bien el salesRep y usar el constructor nuevo
         Lead lead = new Lead(name, phoneNumber, email, companyName);
         leadMap.put(lead.getId(), lead);
 
@@ -48,17 +62,23 @@ public class Controller {
 
         // Get the Lead object to convert
         Lead leadConvert = leadMap.get(id);
+        SalesRep salesRep = salesRepRepository.save(leadConvert.getRepLead());
+
+        // Create new account with all data required
+        Account account = new Account(industry, employeeCount, city, country);
+        account = accountRepository.save(account);
 
         // Create a Contact object based on the Lead data
         Contact decisionMaker = createContact(leadConvert);
+        decisionMaker = contactRepository.save(decisionMaker);
         // Create an Opportunity with the new Contact and some data
-        Opportunity opportunity = createOpportunity(decisionMaker, product, quantity);
-
-        // Create new account with all data required
-        Account account = createAccount(decisionMaker, opportunity, industry, employeeCount, city, country);
+        Opportunity opportunity = new Opportunity(decisionMaker, product, quantity, salesRep, account);
+        opportunityRepository.save(opportunity);
 
         // Save the new objects
+        //TODO: Luego se quita
         accountMap.put(account.getId(), account);
+        opportunityMap.put(opportunity.getId(), opportunity);
         leadMap.remove(id);
 
         return ">> Added new Account: " + account + "\n" +
@@ -72,9 +92,10 @@ public class Controller {
 
     // Method to create an opportunity: when a lead is converted to an opportunity,
     // the user will be asked for the information regarding the possible sale.
-    private Opportunity createOpportunity(Contact decisionMaker, Product product, int quantity) {
+    @Deprecated
+    private Opportunity createOpportunity(Contact decisionMaker, SalesRep salesRep, Product product, int quantity, Account account) {
 
-        Opportunity opportunity = new Opportunity(decisionMaker, product, quantity);
+        Opportunity opportunity = new Opportunity(decisionMaker, product, quantity, salesRep, account);
         opportunityMap.put(opportunity.getId(), opportunity);
         return opportunity;
     }

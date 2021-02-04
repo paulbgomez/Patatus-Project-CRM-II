@@ -48,4 +48,4 @@
 ![screenshot1](screenshots/screenshot5.jpg)
 
 ### Patatús team
-Alejandro Martínez, Ángel Serrano, Paúl Barroso, Paula Sardinero, Rubén Navarro. 
+Alejandro Martínez, Ángel Serrano, Paúl Barroso, Coby Sardinero, Rubén Navarro. 
