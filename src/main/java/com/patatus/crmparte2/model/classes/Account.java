@@ -1,5 +1,7 @@
 package com.patatus.crmparte2.model.classes;
 import com.patatus.crmparte2.model.enums.Industry;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -19,9 +21,11 @@ public class Account {
     private int employeeCount;
     private String city;
     private String country;
-    @OneToMany(mappedBy = "account")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @Fetch(FetchMode.SUBSELECT)
     private List<Contact> contactList;
-    @OneToMany(mappedBy = "account")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "account")
+    @Fetch(FetchMode.SUBSELECT)
     private List<Opportunity> opportunityList;
 
     // This is for the incremented self-generated id:

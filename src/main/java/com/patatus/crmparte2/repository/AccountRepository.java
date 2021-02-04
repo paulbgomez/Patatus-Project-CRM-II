@@ -24,19 +24,19 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     public List<Object[]> findMinEmployeeCount();
 
     // Ordered opportunities by account for the median
-    @Query(value="SELECT oo.count FROM (SELECT COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.id GROUP BY a.id) AS oo ORDER BY count", nativeQuery = true)
+    @Query(value="SELECT oo.count FROM (SELECT COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.account_id GROUP BY a.id) AS oo ORDER BY count", nativeQuery = true)
     public List<Object[]> findOpportunitiesByAccountOrdered();
 
-    // Max opportunities by account for the median
-    @Query(value="SELECT oo.count FROM (SELECT COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.id GROUP BY a.id) AS oo ORDER BY count DESC LIMIT 1", nativeQuery = true)
+    // Max opportunities by account
+    @Query(value="SELECT a.id,COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.account_id GROUP BY a.id ORDER BY count DESC LIMIT 1", nativeQuery = true)
     public List<Object[]> findMaxOpportunitiesByAccount();
 
-    // Min opportunities by account for the median
-    @Query(value="SELECT oo.count FROM (SELECT COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.id GROUP BY a.id) AS oo ORDER BY count ASC LIMIT 1", nativeQuery = true)
+    // Min opportunities by account
+    @Query(value="SELECT a.id,COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.account_id GROUP BY a.id ORDER BY count ASC LIMIT 1", nativeQuery = true)
     public List<Object[]> findMinOpportunitiesByAccount();
 
-    // Average opportunities by account for the median
-    @Query(value="SELECT AVG(oo.count) FROM (SELECT COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.id GROUP BY a.id) AS oo", nativeQuery = true)
+    // Average opportunities by account
+    @Query(value="SELECT AVG(oo.count) FROM (SELECT COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.account_id GROUP BY a.id) AS oo", nativeQuery = true)
     public double findAvgOpportunitiesByAccount();
 
 
