@@ -35,12 +35,15 @@ public class Lead {
         setRepLead(repLead);
     }
         // Este es el constructor viejo, sin SalesRep, para el programa tal como estaba. Se queda así de momento.
+    // Para que no pete le he puesto un salesrep, pero mañana hay que quitarlo
+    @Deprecated
     public Lead(String name, String phoneNumber, String email, String companyName) {
         setId();
         setName(name);
         setPhoneNumber(phoneNumber);
         setEmail(email);
         setCompanyName(companyName);
+        setRepLead(new SalesRep("Ejemplo ejemplo ejemplo"));
     }
 
     // -----------------Methods------------------

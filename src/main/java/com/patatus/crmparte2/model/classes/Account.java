@@ -33,15 +33,17 @@ public class Account {
     }
 
     public Account(Industry industry, int employeeCount, String city, String country) {
-        setId();
+//        setId();
         setIndustry(industry);
         setEmployeeCount(employeeCount);
         setCity(city);
         setCountry(country);
-        setContactList(new ArrayList<Contact>());
-        setOpportunityList(new ArrayList<Opportunity>());
+        // Esto se quitará cuando no tengamos nada que cuegue de las listas
+        setContactList(new ArrayList<>());
+        setOpportunityList(new ArrayList<>());
     }
 
+    @Deprecated
     public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
         setId();
         setIndustry(industry);

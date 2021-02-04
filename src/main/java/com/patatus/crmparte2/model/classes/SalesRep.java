@@ -16,28 +16,20 @@ public class SalesRep {
     @OneToMany(mappedBy = "repOpportunity")
     private List<Opportunity> repOpportunity;
 
-    // To generate autoincrementID:
-    private static int idGenerator = 0;
-
-    // Constructors:
     public SalesRep() {
     }
+
     public SalesRep(String name) {
-        setId();
         setName(name);
     }
 
-    //Getters & Setters
-    public void setId() {
-        this.id = generateId();
-    }
 
-    public static int generateId()  {
-        return idGenerator++;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -62,5 +54,13 @@ public class SalesRep {
 
     public void setRepOpportunity(List<Opportunity> repOpportunity) {
         this.repOpportunity = repOpportunity;
+    }
+
+    @Override
+    public String toString() {
+        return "SalesRep{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

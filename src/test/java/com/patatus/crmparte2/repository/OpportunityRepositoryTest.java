@@ -1,6 +1,7 @@
 package com.patatus.crmparte2.repository;
 
 import com.patatus.crmparte2.model.classes.*;
+import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
 import com.patatus.crmparte2.model.enums.Status;
 import org.junit.jupiter.api.AfterEach;
@@ -49,13 +50,15 @@ class OpportunityRepositoryTest {
                 new Contact("bla", "916726410", "bla@wuw.com", "wuw")
         ));
 
+        Account account = new Account(Industry.ECOMMERCE, 20, "Detroit", "USA");
+
 
         List<Opportunity> opportunityList = opportunityRepository.saveAll(List.of(
-                new Opportunity(contacts.get(0), Product.BOX, 10, salesRepList.get(0)),
-                new Opportunity(contacts.get(1), Product.FLATBED, 100, salesRepList.get(1)),
-                new Opportunity(contacts.get(2), Product.FLATBED, 70, salesRepList.get(1)),
-                new Opportunity(contacts.get(3), Product.FLATBED, 50, salesRepList.get(2)),
-                new Opportunity(contacts.get(4), Product.FLATBED, 70, salesRepList.get(2))
+                new Opportunity(contacts.get(0), Product.BOX, 10, salesRepList.get(0), account),
+                new Opportunity(contacts.get(1), Product.FLATBED, 100, salesRepList.get(1), account),
+                new Opportunity(contacts.get(2), Product.FLATBED, 70, salesRepList.get(1), account),
+                new Opportunity(contacts.get(3), Product.FLATBED, 50, salesRepList.get(2), account),
+                new Opportunity(contacts.get(4), Product.FLATBED, 70, salesRepList.get(2), account)
         ));
 
     }
@@ -79,7 +82,7 @@ class OpportunityRepositoryTest {
         List<Object[]> opportunityOptional = opportunityRepository.findMaxQuantityByRepContainingName();
         assertEquals(100, opportunityOptional.get(0)[1]);
     }
-    
+
 
     @Test
     public void findMaxQuantity_OpportunityList_MaxQuantity(){
@@ -112,7 +115,10 @@ class OpportunityRepositoryTest {
         assertEquals(10, opportunityOptional.get(0)[1]);
     }
 
-
-
+    @Test
+    public void findMedianFromOpportunities(){
+        Integer median = opportunityRepository.findMedianFromOpportunities();
+        assertEquals(70, median);
+    }
 
 }
