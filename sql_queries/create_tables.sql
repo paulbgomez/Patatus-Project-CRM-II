@@ -56,3 +56,9 @@ CREATE TABLE `opportunity` (
   CONSTRAINT `FK9mvhqgny93la8u8k2gd531nex` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`),
   CONSTRAINT `FKggsyw1oa5bk8uryvx9q0rsk8i` FOREIGN KEY (`decision_maker_id`) REFERENCES `contact` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DELETE FROM sales_rep WHERE id > 1;
+DELETE FROM leads WHERE id > 1;
+DELETE FROM contact WHERE id > 1;
+DELETE FROM opportunity WHERE id > 1;
+DELETE FROM account WHERE id > 1;

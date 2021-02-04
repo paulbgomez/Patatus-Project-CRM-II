@@ -18,9 +18,9 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     // 3. The maximum employeeCount can be displayed by typing "Max EmployeeCount"
     @Query(value="SELECT a.id, a.employee_count FROM account a ORDER BY a.employee_count DESC LIMIT 1", nativeQuery = true)
-    public List<Object[]> findMaxEmployeeCount ();
+    public List<Object[]> findMaxEmployeeCount();
 
     // 4. The minimum employeeCount can be displayed by typing "Min EmployeeCount"
     @Query(value="SELECT a.id, a.employee_count FROM account a ORDER BY a.employee_count ASC LIMIT 1", nativeQuery = true)
-    public List<Object[]> findMinEmployeeCount ();
+    public List<Object[]> findMinEmployeeCount();
 }
