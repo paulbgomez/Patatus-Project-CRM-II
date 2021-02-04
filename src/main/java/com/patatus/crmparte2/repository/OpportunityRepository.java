@@ -50,6 +50,7 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
 
 
     // A count of all Opportunities by product can be displayed by typing "Report Opportunity by product"
+    // TODO HACER TEST
     @Query("SELECT o.product, COUNT(o) FROM Opportunity o GROUP BY o.product")
     List<Object[]> findOpportunitiesByProduct();
 

@@ -200,4 +200,9 @@ class OpportunityRepositoryTest {
 
 
 
+    @Test
+    void findOpportunitiesByProduct_CorrectProduct_ProductList() {
+        List<Object[]> opportunityList = opportunityRepository.findOpportunitiesByProduct();
+        assertEquals(2, opportunityList.size());
+    }
 }
