@@ -1,5 +1,7 @@
 package com.patatus.crmparte2.model.classes;
 
+import com.patatus.crmparte2.menu.MenuColors;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -55,7 +57,9 @@ public class Lead {
                 " | name: " + name +
                 " | phoneNumber: " + phoneNumber +
                 " | email: " + email +
-                " | companyName: " + companyName;
+                " | companyName: " + companyName +
+                MenuColors.setColorRed(" -> ") + "SalesRep ID-" + getRepLead().getId() +
+                " | name: " + getRepLead().getName();
     }
 
     //Getters & Setters

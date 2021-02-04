@@ -1,5 +1,6 @@
 package com.patatus.crmparte2.model.classes;
 
+import com.patatus.crmparte2.menu.MenuColors;
 import com.patatus.crmparte2.model.enums.Product;
 import com.patatus.crmparte2.model.enums.Status;
 
@@ -93,7 +94,9 @@ public class Opportunity {
                 " | quantity: " + quantity +
                 " | decisionMaker: ID-" + decisionMaker.getId() + " " + decisionMaker.getName() +
                 " | status: " + status +
-                " | product: " + product;
+                " | product: " + product +
+                MenuColors.setColorRed(" -> ") + "SalesRep ID-" + getRepOpportunity().getId() +
+                " | name: " + getRepOpportunity().getName();
     }
 
     //Getters and setters
