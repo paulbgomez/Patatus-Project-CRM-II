@@ -15,41 +15,41 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
     The max quanitity of products order can be displayed by typing "Max Quantity"
      */
     @Query(value="SELECT s.name, o.quantity FROM opportunity o INNER JOIN sales_rep s ON o.rep_opportunity_id = s.id ORDER BY o.quantity DESC LIMIT 1", nativeQuery = true)
-    public List<Object[]> findMaxQuantityByRepContainingName ();
+    List<Object[]> findMaxQuantityByRepContainingName();
 
     @Query("SELECT MAX(o.quantity) FROM Opportunity o ")
-    public Integer findMaxQuantityFromOpportunities ();
+    Integer findMaxQuantityFromOpportunities();
 
     @Query("SELECT MAX(o.quantity) FROM Opportunity o WHERE o.status = :status")
-    public Integer findMaxQuantityFromWonOpportunities (@Param("status") Enum status);
+    Integer findMaxQuantityFromWonOpportunities(@Param("status") Enum status);
 
     /*
     The min quanitity of products order can be displayed by typing "Min Quantity"
      */
     @Query("SELECT MIN(o.quantity) FROM Opportunity o ")
-    public Integer findMinQuantityFromOpportunities ();
+    Integer findMinQuantityFromOpportunities();
 
     @Query("SELECT MIN(o.quantity) FROM Opportunity o WHERE o.status = :status")
-    public Integer findMinQuantityFromWonOpportunities (@Param("status") Enum status);
+    Integer findMinQuantityFromWonOpportunities(@Param("status") Enum status);
 
     @Query(value="SELECT s.name, o.quantity FROM opportunity o INNER JOIN sales_rep s ON o.rep_opportunity_id = s.id ORDER BY o.quantity ASC LIMIT 1", nativeQuery = true)
-    public List<Object[]> findMinQuantityByRepContainingName ();
+    List<Object[]> findMinQuantityByRepContainingName();
 
     /*
     The mean quanitity of products order can be displayed by typing "Mean Quantity"
      */
     @Query("SELECT AVG(o.quantity) FROM Opportunity o")
-    public double findAverageQuantityFromOpportunities();
+    double findAverageQuantityFromOpportunities();
 
     /*
    The median quanitity of products order can be displayed by typing "Mean Quantity"
     */
     @Query(value ="SELECT o.quantity Median FROM (SELECT o1.quantity, COUNT(o1.quantity) Rank FROM opportunity o1, opportunity o2 WHERE o1.quantity < o2.quantity OR (o1.quantity=o2.quantity) GROUP o1.quantity ORDER BY o1.quantity DESC) o3 WHERE Rank = (SELECT (COUNT(*)+1) DIV 2 FROM Opportunity)", nativeQuery = true)
-    public Integer findMedianFromOpportunities();
+    Integer findMedianFromOpportunities();
 
     // A count of all Opportunities by product can be displayed by typing "Report Opportunity by product"
-    @Query("SELECT o.product, COUNT(*) FROM Opportunity o GROUP BY o.product")
-    public List<Object[]> findOpportunitiesByProduct();
+    @Query("SELECT o.product, COUNT(o) FROM Opportunity o GROUP BY o.product")
+    List<Object[]> findOpportunitiesByProduct();
 
     // A count of all CLOSED_WON Opportunities by product can be displayed by typing "Report CLOSED-WON by product"
     // A count of all CLOSED_LOST Opportunities by product can be displayed by typing "Report CLOSED-LOST by product"
@@ -58,10 +58,10 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
     // gives you a report of all the opportunities that are with this status
     // TODO HACER TEST
     @Query("SELECT o.product, COUNT(o.status) FROM Opportunity o WHERE o.status=:status GROUP BY o.product")
-    public List<Object[]> findByProductAndStatus(@Param("status") Enum status);
+    List<Object[]> findByProductAndStatus(@Param("status") Enum status);
 
     // A count of all Opportunities by country can be displayed by typing "Report Opportunity by Country"
     // TODO HACER TEST
-    @Query("SELECT a.country, COUNT(o.id) FROM Opportunity o RIGHT JOIN o.accountId a GROUP BY a.country")
-    public List<Object[]> findOpportunitiesByCountry();
+    @Query("SELECT a.country, COUNT(o.id) FROM Opportunity o RIGHT JOIN o.account a GROUP BY a.country")
+    List<Object[]> findOpportunitiesByCountry();
 }
