@@ -37,8 +37,8 @@
 |exit|Exits the CRM console.|
 
 ## UML DIAGRAMS
-![diagram1](uml/crm_classesDiagram_final.png)
-![diagram2](uml/crm_useCases_final.png)
+![diagram1](uml_diagrams/class-diagram.png)
+![diagram2](uml_diagrams/use-case-diagram.png)
 
 ## SCREENSHOTS
 ![screenshot1](screenshots/screenshot1.jpg)
