@@ -24,6 +24,17 @@ public class Contact {
     // Constructors:
     public Contact() {
     }
+
+
+    public Contact(String name, String phoneNumber, String email, String companyName, Account account) {
+        setId();
+        setName(name);
+        setPhoneNumber(phoneNumber);
+        setEmail(email);
+        setCompanyName(companyName);
+        setAccount(account);
+    }
+
     public Contact(String name, String phoneNumber, String email, String companyName) {
         setId();
         setName(name);

@@ -2,6 +2,7 @@ package com.patatus.crmparte2.menu;
 
 import com.patatus.crmparte2.menu.command.Command;
 import com.patatus.crmparte2.controller.Controller;
+import com.patatus.crmparte2.model.classes.SalesRep;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class Menu {
 
     @Autowired
     private Controller controller;
-    //private final Scanner scanner = new Scanner(System.in);
 
     // Show main menu and takes you to each method according to the command type.
     public void show(Scanner scanner){
@@ -46,9 +46,10 @@ public class Menu {
                     String email =  readFormattedString(scanner,"VALID email address: ", "[\\w-.]+@(?:[\\w-]+\\.)+[\\w-]+");
                     System.out.print("Company name: ");
                     String companyName = scanner.nextLine().trim();
+                    SalesRep repLead = readAndFindSalesRep(scanner);
                     System.out.print("Are you sure all the data is ok? (Y || n): ");
                     if (scanner.nextLine().equalsIgnoreCase("Y")){
-                        System.out.println(controller.newLead(name, phoneNumber, email, companyName));
+                        System.out.println(controller.newLead(name, phoneNumber, email, companyName, repLead));
                     }
                     else {
                         System.out.println("Cancelling Lead creation...");
@@ -113,6 +114,10 @@ public class Menu {
                     break;
 
                 case NEW_SALESREP:
+                    System.out.print("Name: ");
+                    String salesRepName = scanner.nextLine().trim();
+                    System.out.println(controller.newSalesRep(salesRepName));
+                    break;
                 case SHOW_SALESREPS:
                     System.out.println("not implemented yet");
                     break;
@@ -200,6 +205,25 @@ public class Menu {
                     return;
             }
         }
+    }
+
+    private SalesRep readAndFindSalesRep(Scanner scanner) {
+        int n;
+        Optional<SalesRep> salesRep;
+        while (true) {
+            System.out.print("SalesRep id: ");
+            String line = scanner.nextLine().trim();
+            try {
+                n = Integer.parseInt(line);
+                salesRep = controller.findSalesRep(n);
+                if (salesRep.isPresent()) {
+                    return salesRep.get();
+                }
+            } catch (NumberFormatException ignore) {
+            }
+
+        }
+
     }
 
     // This method allows us to normalize the user's input and obtain their arguments.

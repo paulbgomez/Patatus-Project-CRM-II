@@ -3,16 +3,13 @@ package com.patatus.crmparte2.controller;
 import com.patatus.crmparte2.model.classes.*;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
-import com.patatus.crmparte2.repository.AccountRepository;
-import com.patatus.crmparte2.repository.ContactRepository;
-import com.patatus.crmparte2.repository.OpportunityRepository;
-import com.patatus.crmparte2.repository.SalesRepRepository;
+import com.patatus.crmparte2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,20 +17,30 @@ public class Controller {
     @Autowired
     AccountRepository accountRepository;
     @Autowired
+    ContactRepository contactRepository;
+    @Autowired
+    LeadRepository leadRepository;
+    @Autowired
     OpportunityRepository opportunityRepository;
     @Autowired
     SalesRepRepository salesRepRepository;
-    @Autowired
-    ContactRepository contactRepository;
+
 
     private final Map<Integer, Lead> leadMap = new HashMap<>();
     private final Map<Integer, Account> accountMap = new HashMap<>();
     private final Map<Integer, Opportunity> opportunityMap = new HashMap<>();
 
+    public String newSalesRep(String name) {
+        SalesRep salesRep = new SalesRep(name);
+        salesRep = salesRepRepository.save(salesRep);
+        return ">> Added new SalesRep: " + salesRep;
+    }
+
     // Method in which we ask the user for the necessary data to create a lead, and the we create a new lead.
-    public String newLead(String name, String phoneNumber, String email, String companyName) {
-        //TODO: crear bien el salesRep y usar el constructor nuevo
-        Lead lead = new Lead(name, phoneNumber, email, companyName);
+    public String newLead(String name, String phoneNumber, String email, String companyName, SalesRep repLead) {
+
+        Lead lead = new Lead(name, phoneNumber, email, companyName, repLead);
+        lead = leadRepository.save(lead);
         leadMap.put(lead.getId(), lead);
 
         return ">> Added new Lead: " + lead;
@@ -57,11 +64,12 @@ public class Controller {
     // information of the lead converted into a contact, and an opportunity with the information
     // regarding the possible sale.
     public String convertLead(int id, Product product, int quantity, Industry industry, int employeeCount, String city, String country) {
-        if (!checkIfExistsLead(id))
-            return printLeadNotFound(id);
-
         // Get the Lead object to convert
-        Lead leadConvert = leadMap.get(id);
+        Optional<Lead> leadFound = leadRepository.findById(id);
+        if (leadFound.isEmpty())
+            return printLeadNotFound(id);
+        Lead leadConvert = leadFound.get();
+
         SalesRep salesRep = salesRepRepository.save(leadConvert.getRepLead());
 
         // Create new account with all data required
@@ -69,8 +77,9 @@ public class Controller {
         account = accountRepository.save(account);
 
         // Create a Contact object based on the Lead data
-        Contact decisionMaker = createContact(leadConvert);
+        Contact decisionMaker = createContact(leadConvert, account);
         decisionMaker = contactRepository.save(decisionMaker);
+
         // Create an Opportunity with the new Contact and some data
         Opportunity opportunity = new Opportunity(decisionMaker, product, quantity, salesRep, account);
         opportunityRepository.save(opportunity);
@@ -86,8 +95,8 @@ public class Controller {
     }
 
     // Method to create a contact with the information that had been registered in the lead that has been converted
-    private Contact createContact(Lead lead) {
-        return new Contact(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName());
+    private Contact createContact(Lead lead, Account account) {
+        return new Contact(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName(), account);
     }
 
     // Method to create an opportunity: when a lead is converted to an opportunity,
@@ -161,5 +170,9 @@ public class Controller {
     // Method to check if there is an existing Opportunity with this id
     public boolean checkIfExistsOpportunity(int id) {
         return opportunityMap.containsKey(id);
+    }
+
+    public Optional<SalesRep> findSalesRep(int n) {
+        return salesRepRepository.findById(n);
     }
 }

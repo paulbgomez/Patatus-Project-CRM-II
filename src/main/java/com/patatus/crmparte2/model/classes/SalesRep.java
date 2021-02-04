@@ -23,7 +23,7 @@ public class SalesRep {
     public SalesRep() {
     }
     public SalesRep(String name) {
-        setId();
+//        setId();
         setName(name);
     }
 

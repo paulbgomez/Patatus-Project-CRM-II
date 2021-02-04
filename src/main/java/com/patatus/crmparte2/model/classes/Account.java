@@ -33,11 +33,12 @@ public class Account {
     }
 
     public Account(Industry industry, int employeeCount, String city, String country) {
-        setId();
+//        setId();
         setIndustry(industry);
         setEmployeeCount(employeeCount);
         setCity(city);
         setCountry(country);
+        // Esto se quitará cuando no tengamos nada que cuegue de las listas
         setContactList(new ArrayList<>());
         setOpportunityList(new ArrayList<>());
     }
