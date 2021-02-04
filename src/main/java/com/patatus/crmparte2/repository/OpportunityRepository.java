@@ -28,7 +28,7 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
     Integer findMaxQuantityFromOpportunities();
 
     @Query("SELECT MAX(o.quantity) FROM Opportunity o WHERE o.status = :status")
-    Integer findMaxQuantityFromWonOpportunities(@Param("status") Enum status);
+    Integer findMaxQuantityFromOpportunitiesByStatus(@Param("status") Enum status);
 
     /*
     The min quanitity of products order can be displayed by typing "Min Quantity"
@@ -37,7 +37,7 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
     Integer findMinQuantityFromOpportunities();
 
     @Query("SELECT MIN(o.quantity) FROM Opportunity o WHERE o.status = :status")
-    Integer findMinQuantityFromWonOpportunities(@Param("status") Enum status);
+    Integer findMinQuantityFromOpportunitiesByStatus(@Param("status") Enum status);
 
     @Query(value="SELECT s.name, o.quantity FROM opportunity o INNER JOIN sales_rep s ON o.rep_opportunity_id = s.id ORDER BY o.quantity ASC LIMIT 1", nativeQuery = true)
     List<Object[]> findMinQuantityByRepContainingName();
@@ -48,8 +48,8 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
     @Query("SELECT AVG(o.quantity) FROM Opportunity o")
     double findAverageQuantityFromOpportunities();
 
-
     // A count of all Opportunities by product can be displayed by typing "Report Opportunity by product"
+    // TODO HACER TEST
     @Query("SELECT o.product, COUNT(o) FROM Opportunity o GROUP BY o.product")
     List<Object[]> findOpportunitiesByProduct();
 

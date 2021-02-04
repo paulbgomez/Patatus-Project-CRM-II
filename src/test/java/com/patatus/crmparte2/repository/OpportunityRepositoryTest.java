@@ -96,7 +96,7 @@ class OpportunityRepositoryTest {
 
     @Test
     public void findMaxQuantity_OpportunityWonList_MaxQuantity(){
-        Integer opportunityOptional = opportunityRepository.findMaxQuantityFromWonOpportunities(Status.OPEN);
+        Integer opportunityOptional = opportunityRepository.findMaxQuantityFromOpportunitiesByStatus(Status.OPEN);
         assertEquals(100, opportunityOptional);
     }
 
@@ -108,7 +108,7 @@ class OpportunityRepositoryTest {
 
     @Test
     public void findMinQuantity_OpportunityWonList_MaxQuantity(){
-        Integer opportunityOptional = opportunityRepository.findMinQuantityFromWonOpportunities(Status.OPEN);
+        Integer opportunityOptional = opportunityRepository.findMinQuantityFromOpportunitiesByStatus(Status.OPEN);
         assertEquals(10, opportunityOptional);
     }
 
@@ -130,13 +130,13 @@ class OpportunityRepositoryTest {
         if(objects.size() % 2 != 0 ){
             Integer median = (objects.size()-1)/2;
             System.out.println("Median is " + objects.get(median)[0]);
+            assertEquals(70, median);
         } else {
             Integer firstHalf = (Integer) objects.get((objects.size()/2)-1)[0];
             Integer secondHalf = (Integer) objects.get(objects.size()/2)[0];
             System.out.println("Median is " + (firstHalf + secondHalf)/2);
         }
 
-        assertEquals(5, objects.size());
     }
 
     @Test
@@ -186,12 +186,12 @@ class OpportunityRepositoryTest {
     @Test
     public void findOpportunitiesByIndustry(){
         List<Object[]> objects = opportunityRepository.findOpportunitiesByIndustry();
-        assertEquals(accountRepository.findAll().get(0).getCity(), objects.get(0)[0]);
+        assertEquals(accountRepository.findAll().get(0).getIndustry(), objects.get(0)[0]);
         assertEquals(Industry.ECOMMERCE, objects.get(0)[0]);
     }
 
     @Test
-    public void findOpportunitiesByIndustryandStatus(){
+    public void findOpportunitiesByIndustryAndStatus(){
         List<Object[]> objects = opportunityRepository.findByIndustryAndStatus(Status.OPEN);
         assertEquals(accountRepository.findAll().get(0).getIndustry(), objects.get(0)[0]);
         assertEquals(1, objects.size());
@@ -200,4 +200,9 @@ class OpportunityRepositoryTest {
 
 
 
+    @Test
+    void findOpportunitiesByProduct_CorrectProduct_ProductList() {
+        List<Object[]> opportunityList = opportunityRepository.findOpportunitiesByProduct();
+        assertEquals(2, opportunityList.size());
+    }
 }
