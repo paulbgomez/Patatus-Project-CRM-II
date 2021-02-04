@@ -23,4 +23,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     // 4. The minimum employeeCount can be displayed by typing "Min EmployeeCount"
     @Query(value="SELECT a.id, a.employee_count FROM account a ORDER BY a.employee_count ASC LIMIT 1", nativeQuery = true)
     public List<Object[]> findMinEmployeeCount();
+
+
 }

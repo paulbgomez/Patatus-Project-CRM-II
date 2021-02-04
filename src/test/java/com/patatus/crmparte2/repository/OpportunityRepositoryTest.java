@@ -130,7 +130,7 @@ class OpportunityRepositoryTest {
         if(objects.size() % 2 != 0 ){
             Integer median = (objects.size()-1)/2;
             System.out.println("Median is " + objects.get(median)[0]);
-            assertEquals(70, median);
+            assertEquals(70, objects.get(median)[0]);
         } else {
             Integer firstHalf = (Integer) objects.get((objects.size()/2)-1)[0];
             Integer secondHalf = (Integer) objects.get(objects.size()/2)[0];
