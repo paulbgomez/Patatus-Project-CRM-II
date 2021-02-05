@@ -100,6 +100,7 @@ public class Menu {
                     Account account;
                     if (controller.checkIfExistsAnyAccount() && userWantsToSelectExistingAccount(scanner)){
                         account = selectExistingAccount(scanner);
+                        System.out.println(controller.convertLead(idToConvert, product, quantity, account));
                     } else {
                         System.out.print("Number of employees: ");
                         int employeeCount = readNonNegativeInt(scanner, "VALID Number of employees: ");
@@ -108,9 +109,9 @@ public class Menu {
                         System.out.print("Country: ");
                         String country = readNonEmptyString(scanner, "VALID Country: ");
                         account = controller.createAccount(industry, employeeCount, city, country);
+                        System.out.println(controller.convertLead(idToConvert, product, quantity, account));
                         System.out.println(">> Added new Account: " + account);
                     }
-                    System.out.println(controller.convertLead(idToConvert, product, quantity, account));
                     break;
 
                 case CLOSE_WON_OPP:
