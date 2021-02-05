@@ -79,16 +79,19 @@
 |max opps per account|Displays the max number of Opportunities associated with an Account.|
 |min opps per account|Displays the min number of Opportunities associated with an Account.|
 
-## UML DIAGRAMS
-![diagram1](uml_diagrams/class-diagram.png)
-![diagram2](uml_diagrams/use-case-diagram.png)
 
-## SCREENSHOTS
-![screenshot1](screenshots/screenshot1.jpg)
-![screenshot1](screenshots/screenshot2.jpg)
-![screenshot1](screenshots/screenshot3.jpg)
-![screenshot1](screenshots/screenshot4.jpg)
-![screenshot1](screenshots/screenshot5.jpg)
+
+## UML DIAGRAMS
+
+### CLASS DIAGRAM
+
+![diagram1](uml_diagrams/classDiagram.png)
+
+
+
+### USE-CAUSE DIAGRAM
+
+![diagram2](uml_diagrams/useCauseDiagramEditable.png)
 
 ### Patatús team
 Alejandro Martínez, Ángel Serrano, Paúl Barroso, Coby Sardinero, Rubén Navarro. 
