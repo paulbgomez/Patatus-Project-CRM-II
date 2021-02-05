@@ -236,5 +236,25 @@ public class Controller {
         return printTwoResults(result);
     }
 
+    public String findOpportunityCountByCountry() {
+        List<Object[]> result = opportunityRepository.findOpportunitiesByCountry();
+        return printTwoResults(result);
+    }
+
+    public String findClosedWonCountByCountry() {
+        List<Object[]> result = opportunityRepository.findByCountryAndStatus(Status.CLOSED_WON);
+        return printTwoResults(result);
+    }
+
+    public String findClosedLostCountByCountry() {
+        List<Object[]> result = opportunityRepository.findByCountryAndStatus(Status.CLOSED_LOST);
+        return printTwoResults(result);
+    }
+
+    public String findOpenCountByCountry() {
+        List<Object[]> result = opportunityRepository.findByCountryAndStatus(Status.OPEN);
+        return printTwoResults(result);
+    }
+
 
 }
