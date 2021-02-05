@@ -218,10 +218,16 @@ public class Menu {
                     break;
 
                 case MEAN_QUANTITY:
+                    System.out.println(controller.findMeanQuantity());
+                    break;
                 case MEDIAN_QUANTITY:
+                    System.out.println(controller.findMedianQuantity());
+                    break;
                 case MAX_QUANTITY:
+                    System.out.println(controller.findMaxQuantity());
+                    break;
                 case MIN_QUANTITY:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.findMinQuantity());
                     break;
 
                 case MEAN_OPPS_PER_ACCOUNT:

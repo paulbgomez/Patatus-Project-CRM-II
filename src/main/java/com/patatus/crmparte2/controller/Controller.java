@@ -6,8 +6,6 @@ import com.patatus.crmparte2.model.enums.Product;
 import com.patatus.crmparte2.model.enums.Status;
 import com.patatus.crmparte2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -179,6 +177,7 @@ public class Controller {
         return accountRepository.findById(id);
     }
 
+    // Lis MUST de previously ordered
     public Integer findMedian(List<Object[]> objects){
         Integer median;
         int medianPosition = objects.size()/2;
@@ -253,20 +252,18 @@ public class Controller {
     }
 
     public double findMeanEmployee() {
-        double result = accountRepository.findMeanEmployeeCount();
-        return result;
+        return accountRepository.findMeanEmployeeCount();
     }
 
     public Integer findMedianEmployee () {
         List<Object[]> result = accountRepository.findOpportunitiesByAccountOrdered();
-        Integer intResult = findMedian(result);
-        return intResult;
+        return findMedian(result);
     }
     public String findOpportunityCountBySalesRep() {
         List<Object[]> result = salesRepRepository.findOpportunityCountBySalesRep();
         return printTwoResults(result);
     }
-    public String findOpportunityByStatusCountBySalesRep(Enum status) {
+    public String findOpportunityByStatusCountBySalesRep(Status status) {
         List<Object[]> result = salesRepRepository.findOpportunityByStatusCountBySalesRep(status);
         return printTwoResults(result);
     }
@@ -331,7 +328,23 @@ public class Controller {
         return printTwoResults(result);
     }
     public double findAvgOpportunitiesByAccount(){
-        double result = accountRepository.findAvgOpportunitiesByAccount();
-        return result;
+        return accountRepository.findAvgOpportunitiesByAccount();
+    }
+
+    public double findMeanQuantity() {
+        return opportunityRepository.findAverageQuantityFromOpportunities();
+    }
+
+    public Integer findMedianQuantity() {
+        List<Object[]> result = opportunityRepository.orderOpportunities();
+        return findMedian(result);
+    }
+
+    public Integer findMaxQuantity() {
+        return opportunityRepository.findMaxQuantityFromOpportunities();
+    }
+
+    public Integer findMinQuantity() {
+        return opportunityRepository.findMinQuantityFromOpportunities();
     }
 }
