@@ -180,14 +180,14 @@ public class Controller {
     }
 
     // Lis MUST de previously ordered
-    public Integer findMedian(List<Integer[]> objects){
-        Integer median;
+    public double findMedian(List<Integer[]> objects){
+        double median;
         int medianPosition = objects.size()/2;
         if(objects.size() % 2 != 0 ){
-            median = (Integer) objects.get(medianPosition)[0];
+            median = objects.get(medianPosition)[0];
         } else {
-            Integer firstHalf = (Integer) objects.get((objects.size()/2)-1)[0];
-            Integer secondHalf = (Integer) objects.get(medianPosition)[0];
+            double firstHalf = (double) objects.get((objects.size()/2)-1)[0];
+            double secondHalf = (double) objects.get(medianPosition)[0];
             median = (firstHalf + secondHalf)/2;
         }
         return median;
@@ -257,7 +257,7 @@ public class Controller {
         return accountRepository.findMeanEmployeeCount();
     }
 
-    public Integer findMedianEmployee () {
+    public double findMedianEmployee () {
         List<Integer[]> result = accountRepository.findEmployeesByAccountOrdered();
         return findMedian(result);
     }
@@ -333,7 +333,7 @@ public class Controller {
         return accountRepository.findAvgOpportunitiesByAccount();
     }
 
-    public Integer findMedianOpportunitiesByAccount() {
+    public double findMedianOpportunitiesByAccount() {
         return findMedian(accountRepository.findOpportunitiesByAccountOrdered());
     }
 
@@ -341,7 +341,7 @@ public class Controller {
         return opportunityRepository.findAverageQuantityFromOpportunities();
     }
 
-    public Integer findMedianQuantity() {
+    public double findMedianQuantity() {
         List<Integer[]> result = opportunityRepository.orderOpportunities();
         return findMedian(result);
     }

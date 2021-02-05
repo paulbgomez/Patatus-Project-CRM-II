@@ -117,6 +117,13 @@ class AccountRepositoryTest {
 
     @Test
     public void findMedianOpportunitiesByAccount(){
+        List<Integer[]>  objects = accountRepository.findOpportunitiesByAccountOrdered();
+        assertEquals(1.5, controller.findMedian(objects));
+    }
 
+    @Test
+    public void findMedianEmployeesByAccount(){
+        List<Integer[]>  objects = accountRepository.findEmployeesByAccountOrdered();
+        assertEquals(11., controller.findMedian(objects));
     }
 }
