@@ -51,11 +51,11 @@ class OpportunityRepositoryTest {
         accountRepository.save(account);
 
         List<Contact> contacts = contactRepository.saveAll(List.of(
-                new Contact("bla", "916726410", "bla@wuw.com", "wuw"),
-                new Contact("bla", "916726410", "bla@wuw.com", "wuw"),
-                new Contact("bla", "916726410", "bla@wuw.com", "wuw"),
-                new Contact("bla", "916726410", "bla@wuw.com", "wuw"),
-                new Contact("bla", "916726410", "bla@wuw.com", "wuw")
+                new Contact("bla", "916726410", "bla@wuw.com", "wuw",account),
+                new Contact("bla", "916726410", "bla@wuw.com", "wuw",account),
+                new Contact("bla", "916726410", "bla@wuw.com", "wuw",account),
+                new Contact("bla", "916726410", "bla@wuw.com", "wuw",account),
+                new Contact("bla", "916726410", "bla@wuw.com", "wuw",account)
         ));
 
         List<Opportunity> opportunityList = opportunityRepository.saveAll(List.of(

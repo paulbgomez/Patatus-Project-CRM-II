@@ -40,9 +40,9 @@ public class SalesRepRepositoryTest {
         Account account1 = accountRepository.save(new Account(Industry.PRODUCE, 20, "Madrid", "Spain"));
         Account account2 = accountRepository.save(new Account(Industry.ECOMMERCE, 2, "Barcelona", "Spain"));
 
-        Contact contact1 = contactRepository.save(new Contact("María", "916726410", "maria@transportesmaria.com", "Transportes María"));
-        Contact contact2 = contactRepository.save(new Contact("Antonio", "62913665", "antonio@antruck.com", "Antruck S.L."));
-        Contact contact3 = contactRepository.save(new Contact("Sonia", "676208814", "sonia@wowpackages.com", "Wow Packages!"));
+        Contact contact1 = contactRepository.save(new Contact("María", "916726410", "maria@transportesmaria.com", "Transportes María", account1));
+        Contact contact2 = contactRepository.save(new Contact("Antonio", "62913665", "antonio@antruck.com", "Antruck S.L.", account1));
+        Contact contact3 = contactRepository.save(new Contact("Sonia", "676208814", "sonia@wowpackages.com", "Wow Packages!", account2));
 
         Opportunity opportunity1 = opportunityRepository.save(new Opportunity(contact1, Product.BOX, 5, salesRep1, account1));
         Opportunity opportunity2 = opportunityRepository.save(new Opportunity(contact2, Product.FLATBED, 4, salesRep1, account1));
