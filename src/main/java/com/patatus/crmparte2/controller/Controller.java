@@ -237,4 +237,13 @@ public class Controller {
     }
 
 
+    public String findOpportunityCountByIndustry() {
+        List<Object[]> result = opportunityRepository.findOpportunitiesByIndustry();
+        return printTwoResults(result);
+    }
+
+    public String findOpportunityByStatusCountByIndustry(Status status) {
+        List<Object[]> result = opportunityRepository.findByIndustryAndStatus(status);
+        return printTwoResults(result);
+    }
 }
