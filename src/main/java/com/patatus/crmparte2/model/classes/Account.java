@@ -68,17 +68,18 @@ public class Account {
     // Override of the toString() method to display the Accounts in a more friendly way.
     @Override
     public String toString() {
-        return "\n   ID-" + id +
-                " | industry: " + industry +
+        return "---------Account " + id +"---------" +
+                "\n" +
+                "Industry: " + industry +
                 " | employeeCount: " + employeeCount +
                 " | city: " + city +
                 " | country: " + country +
-                "\n   List of Contacts:" +
-                "\n      " + contactList.stream()
+                "\n->List of Contacts:" +
+                "\n" + contactList.stream()
                 .map(Contact::toString)
                 .collect(Collectors.joining("\n")) +
-                "\n   List of Opportunities:" +
-                "\n      " + opportunityList.stream()
+                "\n->List of Opportunities:" +
+                "\n" + opportunityList.stream()
                 .map(Opportunity::toString)
                 .collect(Collectors.joining("\n"));
     }

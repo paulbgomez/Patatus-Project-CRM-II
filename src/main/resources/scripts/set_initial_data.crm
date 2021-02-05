@@ -1,4 +1,0 @@
-run add_new_leads.crm
-run convert_leads.crm
-run close_opportunities.crm
-exit
