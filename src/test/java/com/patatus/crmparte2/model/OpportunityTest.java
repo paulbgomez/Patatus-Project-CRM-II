@@ -1,7 +1,10 @@
 package com.patatus.crmparte2.model;
 
+import com.patatus.crmparte2.model.classes.Account;
 import com.patatus.crmparte2.model.classes.Contact;
 import com.patatus.crmparte2.model.classes.Opportunity;
+import com.patatus.crmparte2.model.classes.SalesRep;
+import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
 import com.patatus.crmparte2.model.enums.Status;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,15 +13,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OpportunityTest {
-    private static Opportunity opportunity;
-    private static Opportunity opportunity2;
-    private static Opportunity opportunity3;
+    static Opportunity opportunity;
 
     @BeforeAll
     static void beforeAll() {
-        opportunity = new Opportunity(new Contact("Juan", "+34916826184","juan@asinc.com", "As INC."), Product.BOX, 5);
-        opportunity2 = new Opportunity(new Contact("Alexa", "+34916826184","alexa@asinc.com", "As INC."), Product.BOX, 5);
-        opportunity3 = new Opportunity(new Contact("Siri", "+34916826184","siri@asinc.com", "As INC."), Product.BOX, 5);
+        SalesRep salesrep = new SalesRep("Pepe");
+        Account account = new Account(Industry.PRODUCE, 20, "Madrid", "Spain");
+        Contact contact = new Contact("Juan", "+34916826184","juan@asinc.com", "As INC.", account);
+        opportunity = new Opportunity(contact, Product.FLATBED, 2, salesrep, account);
     }
 
     @Test
@@ -33,8 +35,4 @@ class OpportunityTest {
         assertEquals(Status.CLOSED_LOST, opportunity.getStatus());
     }
 
-    @Test
-    void generateId() {
-        assertEquals(1, opportunity2.getId());
-    }
 }

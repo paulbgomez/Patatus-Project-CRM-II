@@ -3,6 +3,7 @@ package com.patatus.crmparte2.model;
 import com.patatus.crmparte2.model.classes.Account;
 import com.patatus.crmparte2.model.classes.Contact;
 import com.patatus.crmparte2.model.classes.Opportunity;
+import com.patatus.crmparte2.model.classes.SalesRep;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,40 +15,28 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
-    private static Account account1;
-    private static Account account2;
-    private static Contact contact1;
-    private static Opportunity opportunity1;
+    private static SalesRep salesRep;
+    private static Account account;
+    private static Contact contact;
+    private static Opportunity opportunity;
 
     @BeforeAll
     public static void setUp() {
-        List<Contact> contactList = new ArrayList<>();
-        List<Opportunity> opportunityList = new ArrayList<>();
-        contact1 = new Contact("Pepe", "+34913467512", "pepe@pepeinc.com", "Pepe Inc.");
-        opportunity1 = new Opportunity(contact1, Product.HYBRID, 2);
-        account1 = new Account(Industry.PRODUCE, 3, "Madrid", "Spain",contactList,opportunityList);
-        account2 = new Account(Industry.ECOMMERCE, 5, "Barcelona", "Spain", contactList, opportunityList);
-    }
-
-    @Test
-    void setId_FirstAccount_ID0(){
-        assertEquals(0,account1.getId());
-    }
-
-    @Test
-    void generateID_NewAccount_ID1(){
-        assertEquals(1, account2.getId());
+        salesRep = new SalesRep("Juan");
+        account = new Account(Industry.PRODUCE, 3, "Madrid", "Spain");
+        contact = new Contact("Pepe", "916726410", "as@as.com", "as", account);
+        opportunity = new Opportunity(contact, Product.BOX, 2, salesRep, account);
     }
 
     @Test
     void addToContactList_NewContact_ThatContactOnList() {
-        account1.addToContactList(contact1);
-        assertEquals(1,account1.getContactList().size());
+        account.addToContactList(contact);
+        assertEquals(1,account.getContactList().size());
     }
 
     @Test
     void addToOpportunityList_NewOpportunity_ThatOpportunityOnList() {
-        account1.addToOpportunityList(opportunity1);
-        assertEquals(1, account1.getOpportunityList().size());
+        account.addToOpportunityList(opportunity);
+        assertEquals(1, account.getOpportunityList().size());
     }
 }
