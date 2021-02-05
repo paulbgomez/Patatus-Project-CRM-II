@@ -203,10 +203,13 @@ public class Menu {
                     
                 case MEAN_EMPLOYEECOUNT:
                     System.out.println(controller.findMeanEmployee());
+                    break;
                 case MEDIAN_EMPLOYEECOUNT:
                     System.out.println(controller.findMedianEmployee());
+                    break;
                 case MAX_EMPLOYEECOUNT:
                     System.out.println(controller.findMaxEmployee());
+                    break;
                 case MIN_EMPLOYEECOUNT:
                     System.out.println(controller.findMinEmployee());
                     break;
