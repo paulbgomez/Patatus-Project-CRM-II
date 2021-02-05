@@ -6,8 +6,6 @@ import com.patatus.crmparte2.model.enums.Product;
 import com.patatus.crmparte2.model.enums.Status;
 import com.patatus.crmparte2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -236,5 +234,18 @@ public class Controller {
         return printTwoResults(result);
     }
 
+    public String findMaxOpportunitiesByAccount(){
+        List<Object[]> result = accountRepository.findMaxOpportunitiesByAccount();
+        return printTwoResults(result);
+    }
 
+    public String findMinOpportunitiesByAccount(){
+        List<Object[]> result = accountRepository.findMinOpportunitiesByAccount();
+        return printTwoResults(result);
+    }
+
+    public double findAvgOpportunitiesByAccount(){
+        double result = accountRepository.findAvgOpportunitiesByAccount();
+        return result;
+    }
 }

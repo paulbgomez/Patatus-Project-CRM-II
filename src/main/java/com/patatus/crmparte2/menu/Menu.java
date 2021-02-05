@@ -204,10 +204,14 @@ public class Menu {
                     break;
 
                 case MEAN_OPPS_PER_ACCOUNT:
+                    System.out.println(controller.findAvgOpportunitiesByAccount());
+                    break;
                 case MEDIAN_OPPS_PER_ACCOUNT:
                 case MAX_OPPS_PER_ACCOUNT:
+                    System.out.println(controller.findMaxOpportunitiesByAccount());
+                    break;
                 case MIN_OPPS_PER_ACCOUNT:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.findMinOpportunitiesByAccount());
                     break;
                     
                 case HELP:
