@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.*;
 
+import static com.patatus.crmparte2.model.enums.Status.*;
+
 @Service
 public class Menu {
     // Properties
@@ -137,10 +139,16 @@ public class Menu {
                     System.out.println(controller.findLeadCountBySalesRep());
                     break;
                 case REPORT_OPPORTUNITY_BY_SALESREP:
+                    System.out.println(controller.findOpportunityCountBySalesRep());
+                    break;
                 case REPORT_CLOSED_WON_BY_SALESREP:
+                    System.out.println(controller.findOpportunityByStatusCountBySalesRep(CLOSED_WON));
+                    break;
                 case REPORT_CLOSED_LOST_BY_SALESREP:
+                    System.out.println(controller.findOpportunityByStatusCountBySalesRep(CLOSED_LOST));
+                    break;
                 case REPORT_OPEN_BY_SALESREP:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.findOpportunityByStatusCountBySalesRep(OPEN));
                     break;
                     
                 //case REPORT_LEAD_BY_PRODUCT:

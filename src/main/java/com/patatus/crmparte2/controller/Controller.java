@@ -7,6 +7,7 @@ import com.patatus.crmparte2.model.enums.Status;
 import com.patatus.crmparte2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -197,13 +198,21 @@ public class Controller {
     public String printTwoResults(List<Object[]> result){
         String string ="";
         for (Object[] row : result){
-            string+=row[0].toString()+ " " + ((Long)row[1]).toString() +"\n";
+            string+=row[0].toString()+ ": " + ((Long)row[1]).toString() +"\n";
         }
         return string;
     }
 
     public String findLeadCountBySalesRep() {
         List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
+        return printTwoResults(result);
+    }
+    public String findOpportunityCountBySalesRep() {
+        List<Object[]> result = salesRepRepository.findOpportunityCountBySalesRep();
+        return printTwoResults(result);
+    }
+    public String findOpportunityByStatusCountBySalesRep(Enum status) {
+        List<Object[]> result = salesRepRepository.findOpportunityByStatusCountBySalesRep(status);
         return printTwoResults(result);
     }
 
