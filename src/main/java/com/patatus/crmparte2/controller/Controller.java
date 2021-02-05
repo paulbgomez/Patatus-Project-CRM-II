@@ -195,13 +195,16 @@ public class Controller {
 
     // REPORTING:
 
-
-    public String findLeadCountBySalesRep() {
-        List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
+    public String printTwoResults(List<Object[]> result){
         String string ="";
         for (Object[] row : result){
             string+=row[0].toString()+ " " + ((Long)row[1]).toString() +"\n";
         }
         return string;
+    }
+
+    public String findLeadCountBySalesRep() {
+        List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
+        return printTwoResults(result);
     }
 }
