@@ -1,5 +1,6 @@
 package com.patatus.crmparte2.repository;
 
+import com.patatus.crmparte2.controller.Controller;
 import com.patatus.crmparte2.model.classes.*;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
@@ -25,6 +26,8 @@ class AccountRepositoryTest {
     OpportunityRepository opportunityRepository;
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    Controller controller;
 
 
     @BeforeEach

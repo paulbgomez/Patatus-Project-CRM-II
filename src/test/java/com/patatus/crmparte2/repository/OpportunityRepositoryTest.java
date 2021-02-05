@@ -1,5 +1,6 @@
 package com.patatus.crmparte2.repository;
 
+import com.patatus.crmparte2.controller.Controller;
 import com.patatus.crmparte2.model.classes.*;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
@@ -28,6 +29,8 @@ class OpportunityRepositoryTest {
     OpportunityRepository opportunityRepository;
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    Controller controller;
 
 
     @BeforeEach
@@ -126,17 +129,7 @@ class OpportunityRepositoryTest {
     @Test
     public void orderOpportunities(){
         List<Object[]>  objects = opportunityRepository.orderOpportunities();
-
-        if(objects.size() % 2 != 0 ){
-            Integer median = (objects.size()-1)/2;
-            System.out.println("Median is " + objects.get(median)[0]);
-            assertEquals(70, objects.get(median)[0]);
-        } else {
-            Integer firstHalf = (Integer) objects.get((objects.size()/2)-1)[0];
-            Integer secondHalf = (Integer) objects.get(objects.size()/2)[0];
-            System.out.println("Median is " + (firstHalf + secondHalf)/2);
-        }
-
+        assertEquals(70, controller.findMedian(objects));
     }
 
     @Test
