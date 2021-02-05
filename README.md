@@ -19,16 +19,17 @@
 
 1. Run <code>Main.java</code> file in your favourite IDE.
 2. Type your commands in the console (case insensitive. You can show a command list wit <code>help</code> command.).
-3. First you need to create Sales Reps with <code>New SalesRep</code> command.
-4. You can show a list of Sales Reps with <code>Show SalesRep</code> command.
-5. Once you have Sales Reps in your DB, you can create leads with <code>New Lead</code> command.
-6. It is possible to lookup for individual leads or list them all.
-7. You can convert leads into opportunities with <code>convert</code> command.
-8. Once converted, CRM will prompt you to choose if insert it into a new Account or into an existing one (if there is at least one existing account).
-9. You can list accounts (with its contacts and opportunities) with <code>Show Accounts</code> command.
-10. You can close-won or close-lost opportunities.
-11. There is a brand-new Reporting Functionality feature with a ton of exciting options.
-12. If you wonder how to exit, simply type exit. Fancy stuff.
+3. If you don't want to type all the commands, you can type <code>run fast_create.crm</code> to populate DB (**aditional feature**).
+4. First you need to create Sales Reps with <code>New SalesRep</code> command.
+5. You can show a list of Sales Reps with <code>Show SalesRep</code> command.
+6. Once you have Sales Reps in your DB, you can create leads with <code>New Lead</code> command.
+7. It is possible to lookup for individual leads or list them all.
+8. You can convert leads into opportunities with <code>convert</code> command.
+9. Once converted, CRM will prompt you to choose if insert it into a new Account or into an existing one (if there is at least one existing account).
+10. You can list accounts (with its contacts and opportunities) with <code>Show Accounts</code> command.
+11. You can close-won or close-lost opportunities.
+12. There is a brand-new Reporting Functionality feature with a ton of exciting options.
+13. If you wonder how to exit, simply type exit. Fancy stuff.
 
 ## LIST OF AVAILABLE COMMANDS
 |Command|Action|
