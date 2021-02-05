@@ -5,6 +5,7 @@ import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
 import com.patatus.crmparte2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -60,39 +61,31 @@ public class Controller {
     }
 
     // Method to convert a lead into an opportunity. When this happens, the lead disappears
-    // from the lead list, and an account is created in its place. This account includes the
-    // information of the lead converted into a contact, and an opportunity with the information
-    // regarding the possible sale.
-    public String convertLead(int id, Product product, int quantity, Industry industry, int employeeCount, String city, String country) {
+    // from the lead list.
+    public String convertLead(int id, Product product, int quantity, Account account) {
         // Get the Lead object to convert
         Optional<Lead> leadFound = leadRepository.findById(id);
         if (leadFound.isEmpty())
             return printLeadNotFound(id);
         Lead leadConvert = leadFound.get();
 
-        SalesRep salesRep = salesRepRepository.save(leadConvert.getRepLead());
+        SalesRep salesRep = leadConvert.getRepLead();
 
-        // Create new account with all data required
-        Account account = new Account(industry, employeeCount, city, country);
-        account = accountRepository.save(account);
-
-        // Create a Contact object based on the Lead data
+        // Create and save a Contact object based on the Lead data
         Contact decisionMaker = createContact(leadConvert, account);
         decisionMaker = contactRepository.save(decisionMaker);
 
-        // Create an Opportunity with the new Contact and some data
+        // Create and save an Opportunity with the new Contact and some data
         Opportunity opportunity = new Opportunity(decisionMaker, product, quantity, salesRep, account);
         opportunityRepository.save(opportunity);
 
-        // Save the new objects
-        //TODO: Luego se quita
-        accountMap.put(account.getId(), account);
-        opportunityMap.put(opportunity.getId(), opportunity);
-        leadMap.remove(id);
+        return ">> Created Opportunity: " + opportunity + "\n" +
+                "<< Removed Lead: " + leadConvert;
+    }
 
-
-        return ">> Added new Account: " + account + "\n" +
-               "<< Removed Lead: " + leadConvert;
+    public Account createAccount(Industry industry, int employeeCount, String city, String country) {
+        Account account = new Account(industry, employeeCount, city, country);
+        return accountRepository.save(account);
     }
 
     // Method to create a contact with the information that had been registered in the lead that has been converted
@@ -164,16 +157,30 @@ public class Controller {
     }
 
     // Method to check if there is an existing Lead with this id
-    public boolean checkIfExistsLead(int id) {
-        return leadMap.containsKey(id);
+    public boolean checkIfExistsLead(Integer id) {
+        return leadRepository.existsById(id);
     }
 
     // Method to check if there is an existing Opportunity with this id
-    public boolean checkIfExistsOpportunity(int id) {
-        return opportunityMap.containsKey(id);
+    public boolean checkIfExistsOpportunity(Integer id) {
+        return opportunityRepository.existsById(id);
+    }
+
+    //TODO fix this
+    public boolean checkIfExistsSalesRep() {
+        return salesRepRepository.exists(Example.of(new SalesRep()));
     }
 
     public Optional<SalesRep> findSalesRep(int n) {
         return salesRepRepository.findById(n);
+    }
+
+    //TODO fix this
+    public boolean checkIfExistsAnyAccount() {
+        return accountRepository.countAccount() > 0;
+    }
+
+    public Optional<Account> findAccount(Integer id) {
+        return accountRepository.findById(id);
     }
 }

@@ -2,6 +2,7 @@ package com.patatus.crmparte2.menu;
 
 import com.patatus.crmparte2.menu.command.Command;
 import com.patatus.crmparte2.controller.Controller;
+import com.patatus.crmparte2.model.classes.Account;
 import com.patatus.crmparte2.model.classes.SalesRep;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
@@ -38,6 +39,10 @@ public class Menu {
             String[] inputArgs = getArgsFromInput(userInput);
             switch(command) {
                 case NEW_LEAD:
+                    if (!controller.checkIfExistsSalesRep()){
+                        System.out.println("One does not simple create a lead without a salesRep.");
+                        break;
+                    }
                     System.out.print("Name: ");
                     //String name = scanner.nextLine().trim();
                     String name = readNonEmptyString(scanner, "VALID name: ");
@@ -91,16 +96,20 @@ public class Menu {
                     } while (!Industry.isValid(industryOption));
                     Industry industry = Industry.get(industryOption);
 
-                    System.out.print("Number of employees: ");
-                    int employeeCount = readNonNegativeInt(scanner, "VALID Number of employees: ");
-                    System.out.print("City: ");
-                    //String city = scanner.nextLine().trim();
-                    String city = readNonEmptyString(scanner, "VALID City: ");
-                    System.out.print("Country: ");
-                    //String country = scanner.nextLine().trim();
-                    String country = readNonEmptyString(scanner, "VALID Country: ");
-
-                    System.out.println(controller.convertLead(idToConvert, product, quantity, industry, employeeCount, city, country));
+                    Account account;
+                    if (controller.checkIfExistsAnyAccount() && userWantsToSelectExistingAccount(scanner)){
+                        account = selectExistingAccount(scanner);
+                    } else {
+                        System.out.print("Number of employees: ");
+                        int employeeCount = readNonNegativeInt(scanner, "VALID Number of employees: ");
+                        System.out.print("City: ");
+                        String city = readNonEmptyString(scanner, "VALID City: ");
+                        System.out.print("Country: ");
+                        String country = readNonEmptyString(scanner, "VALID Country: ");
+                        account = controller.createAccount(industry, employeeCount, city, country);
+                        System.out.println(">> Added new Account: " + account);
+                    }
+                    System.out.println(controller.convertLead(idToConvert, product, quantity, account));
                     break;
 
                 case CLOSE_WON_OPP:
@@ -119,7 +128,6 @@ public class Menu {
 
                 case NEW_SALESREP:
                     System.out.print("Name: ");
-                    //String salesRepName = scanner.nextLine().trim();
                     String salesRepName = readNonEmptyString(scanner, "VALID Name: ");
                     System.out.println(controller.newSalesRep(salesRepName));
                     break;
@@ -210,6 +218,30 @@ public class Menu {
                     return;
             }
         }
+    }
+
+    private Account selectExistingAccount(Scanner scanner) {
+        Optional<Account> account = Optional.empty();
+        String line;
+
+        do {
+            System.out.print("Introduce the id of an existing account: ");
+            try {
+                line = scanner.nextLine().trim();
+                account = controller.findAccount(Integer.parseInt(line));
+            } catch (NumberFormatException ignore) {}
+        } while (account.isEmpty());
+
+        return account.get();
+    }
+
+    private boolean userWantsToSelectExistingAccount(Scanner scanner) {
+        String yesNo;
+        do {
+            System.out.println("Would you like to create a new Account?(Y/N)");
+            yesNo = scanner.nextLine().trim();
+        } while (!"y".equalsIgnoreCase(yesNo) && !"n".equalsIgnoreCase(yesNo));
+        return yesNo.equalsIgnoreCase("n");
     }
 
     private SalesRep readAndFindSalesRep(Scanner scanner) {
