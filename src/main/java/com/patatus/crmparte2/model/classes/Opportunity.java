@@ -95,7 +95,7 @@ public class Opportunity {
                 " | decisionMaker: ID-" + decisionMaker.getId() + " " + decisionMaker.getName() +
                 " | status: " + status +
                 " | product: " + product +
-                MenuColors.setColorRed(" -> ") + "SalesRep ID-" + getRepOpportunity().getId() +
+                MenuColors.setColorRed(" <-> ") + "SalesRep ID-" + getRepOpportunity().getId() +
                 " | name: " + getRepOpportunity().getName();
     }
 

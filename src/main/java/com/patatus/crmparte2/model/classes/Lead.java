@@ -58,7 +58,7 @@ public class Lead {
                 " | phoneNumber: " + phoneNumber +
                 " | email: " + email +
                 " | companyName: " + companyName +
-                MenuColors.setColorRed(" -> ") + "SalesRep ID-" + getRepLead().getId() +
+                MenuColors.setColorRed(" <-> ") + "SalesRep ID-" + getRepLead().getId() +
                 " | name: " + getRepLead().getName();
     }
 

@@ -9,20 +9,26 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Scanner;
 
-@SpringBootApplication
-//public class CrmParte2Application implements CommandLineRunner {  //PARA TEST COMENTA ESTO
+@SpringBootApplication                                                                                          // PARA TEST COMENTA ESTO
+public class CrmParte2Application implements CommandLineRunner {                                                // PARA TEST COMENTA ESTO
+    @Autowired                                                                                                  // PARA TEST COMENTA ESTO
+    Menu menu;                                                                                                  // PARA TEST COMENTA ESTO
 
-    public class CrmParte2Application {       //PARA TEST *DES*COMENTA ESTO
-//    @Autowired                              //PARA TEST DESCOMENTA ESTO
-//    Menu menu;                              //PARA TEST DESCOMENTA ESTO
+    public static void main(String[] args) {                                                                    // PARA TEST COMENTA ESTO
+        SpringApplication.run(CrmParte2Application.class, args);                                                // PARA TEST COMENTA ESTO
+    }                                                                                                           // PARA TEST COMENTA ESTO
 
-    public static void main(String[] args) {
-        SpringApplication.run(CrmParte2Application.class, args);
-    }
+    @Override                                                                                                   // PARA TEST COMENTA ESTO
+    public void run(String... args){                                                                            // PARA TEST COMENTA ESTO
+        System.out.println(MenuColors.setColorWhiteBold("CRM Console.") + " Type 'help' for a command list.");  // PARA TEST COMENTA ESTO
+        menu.show(new Scanner(System.in));                                                                      // PARA TEST COMENTA ESTO
+    }                                                                                                           // PARA TEST COMENTA ESTO
+}                                                                                                               // PARA TEST COMENTA ESTO
 
-//    @Override                                                                                                      //Para TEST COMENTA ESTO
-//    public void run(String... args){                                                                                //Para TEST COMENTA ESTO
-//        System.out.println(MenuColors.setColorWhiteBold("CRM Console.") + " Type 'help' for a command list.");  //Para TEST COMENTA ESTO
-//        menu.show(new Scanner(System.in));                                                                          //Para TEST COMENTA ESTO
-//    }                                                                                                             //Para TEST COMENTA ESTO
-}
+
+//@SpringBootApplication                                                  // PARA TEST *DES*COMENTA ESTO
+//public class CrmParte2Application {                                     // PARA TEST *DES*COMENTA ESTO
+//    public static void main(String[] args) {                            // PARA TEST *DES*COMENTA ESTO
+//        SpringApplication.run(CrmParte2Application.class, args);        // PARA TEST *DES*COMENTA ESTO
+//    }                                                                   // PARA TEST *DES*COMENTA ESTO
+//}                                                                       // PARA TEST *DES*COMENTA ESTO
