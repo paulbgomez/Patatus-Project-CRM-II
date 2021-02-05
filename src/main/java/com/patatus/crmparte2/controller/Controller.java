@@ -160,16 +160,14 @@ public class Controller {
         return opportunityRepository.existsById(id);
     }
 
-    //TODO fix this
     public boolean checkIfExistsSalesRep() {
-        return salesRepRepository.exists(Example.of(new SalesRep()));
+        return salesRepRepository.countSalesRep() > 0;
     }
 
     public Optional<SalesRep> findSalesRep(int n) {
         return salesRepRepository.findById(n);
     }
 
-    //TODO fix this
     public boolean checkIfExistsAnyAccount() {
         return accountRepository.countAccount() > 0;
     }
