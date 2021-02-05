@@ -196,21 +196,21 @@ public class Controller {
     // REPORTING:
 
     public String printTwoResults(List<Object[]> result){
-        String string ="";
+        StringBuilder string = new StringBuilder();
         for (Object[] row : result){
-            string+=row[0].toString()+ ": " + ((Long)row[1]).toString() +"\n";
+            string.append(row[0].toString()).append(": ").append(((Long) row[1]).toString()).append("\n");
         }
-        return string;
+        return string.toString();
     }
 
 
     public String showSalesReps() {
         List<SalesRep> salesReps = salesRepRepository.findAll();
-        String string = "";
+        StringBuilder string = new StringBuilder();
         for (SalesRep salesRep : salesReps){
-            string += salesRep.toString() +"\n";
+            string.append(salesRep.toString()).append("\n");
         }
-        return string;
+        return string.toString();
     }
 
     public String findLeadCountBySalesRep() {
@@ -329,6 +329,10 @@ public class Controller {
     }
     public double findAvgOpportunitiesByAccount(){
         return accountRepository.findAvgOpportunitiesByAccount();
+    }
+
+    public Integer findMedianOpportunitiesByAccount() {
+        return findMedian(accountRepository.findOpportunitiesByAccountOrdered());
     }
 
     public double findMeanQuantity() {

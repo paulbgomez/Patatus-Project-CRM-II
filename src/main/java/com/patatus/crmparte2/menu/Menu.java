@@ -234,6 +234,8 @@ public class Menu {
                     System.out.println(controller.findAvgOpportunitiesByAccount());
                     break;
                 case MEDIAN_OPPS_PER_ACCOUNT:
+                    System.out.println(controller.findMedianOpportunitiesByAccount());
+                    break;
                 case MAX_OPPS_PER_ACCOUNT:
                     System.out.println(controller.findMaxOpportunitiesByAccount());
                     break;
