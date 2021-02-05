@@ -3,6 +3,7 @@ package com.patatus.crmparte2.controller;
 import com.patatus.crmparte2.model.classes.*;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
+import com.patatus.crmparte2.model.enums.Status;
 import com.patatus.crmparte2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -207,4 +208,26 @@ public class Controller {
         List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
         return printTwoResults(result);
     }
+
+    public String findOpportunityCountByCity() {
+        List<Object[]> result = opportunityRepository.findOpportunitiesByCity();
+        return printTwoResults(result);
+    }
+
+    public String findClosedWonCountByCity() {
+        List<Object[]> result = opportunityRepository.findByCityAndStatus(Status.CLOSED_WON);
+        return printTwoResults(result);
+    }
+
+    public String findClosedLostCountByCity() {
+        List<Object[]> result = opportunityRepository.findByCityAndStatus(Status.CLOSED_LOST);
+        return printTwoResults(result);
+    }
+
+    public String findOpenCountByCity() {
+        List<Object[]> result = opportunityRepository.findByCityAndStatus(Status.OPEN);
+        return printTwoResults(result);
+    }
+
+
 }
