@@ -203,6 +203,16 @@ public class Controller {
         return string;
     }
 
+
+    public String showSalesReps() {
+        List<SalesRep> salesReps = salesRepRepository.findAll();
+        String string = "";
+        for (SalesRep salesRep : salesReps){
+            string += salesRep.toString() +"\n";
+        }
+        return string;
+    }
+
     public String findLeadCountBySalesRep() {
         List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
         return printTwoResults(result);
@@ -257,4 +267,13 @@ public class Controller {
     }
 
 
+    public String findOpportunityCountByIndustry() {
+        List<Object[]> result = opportunityRepository.findOpportunitiesByIndustry();
+        return printTwoResults(result);
+    }
+
+    public String findOpportunityByStatusCountByIndustry(Status status) {
+        List<Object[]> result = opportunityRepository.findByIndustryAndStatus(status);
+        return printTwoResults(result);
+    }
 }
