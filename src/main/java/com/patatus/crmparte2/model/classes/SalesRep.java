@@ -16,6 +16,7 @@ public class SalesRep {
     @OneToMany(mappedBy = "repOpportunity")
     private List<Opportunity> repOpportunity;
 
+    //Constructors
     public SalesRep() {
     }
 
@@ -23,7 +24,7 @@ public class SalesRep {
         setName(name);
     }
 
-
+    //getters and setters:
     public Integer getId() {
         return id;
     }

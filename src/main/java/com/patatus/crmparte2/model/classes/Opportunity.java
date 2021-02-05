@@ -25,14 +25,10 @@ public class Opportunity {
     @ManyToOne
     private Account account;
 
-    // To generate autoincrementID:
-    private static int idGenerator = 0;
-
     // Constructors:
     public Opportunity() {
     }
 
-    // constructur definitivo versión final está vez sí
     public Opportunity(Contact decisionMaker, Product product, int quantity, SalesRep repOpportunity, Account account) {
         setId();
         setDecisionMaker(decisionMaker);
@@ -43,7 +39,6 @@ public class Opportunity {
         setAccount(account);
     }
 
-    // Este constructor añade SalesRep, para las pruebas de la  BD. Se queda así de momento. Habría que añadir el Account también.
     @Deprecated
     public Opportunity(Contact decisionMaker, Product product, int quantity, SalesRep repOpportunity) {
         setId();
@@ -53,17 +48,7 @@ public class Opportunity {
         setQuantity(quantity);
         setRepOpportunity(repOpportunity);
     }
-    // ESTO FURULA EN EL TEST PERO HAY QUE REVISAR LAS RELACIONES ¿ACCOUNT EN OPPORTUNITY? ¿QUÉ FUE ANTES, EL HUEVO O LA GALLINA?
-//    public Opportunity(Contact decisionMaker, Product product, int quantity, SalesRep repOpportunity, Account account) {
-//        setId();
-//        setDecisionMaker(decisionMaker);
-//        status = Status.OPEN;
-//        setProduct(product);
-//        setQuantity(quantity);
-//        setRepOpportunity(repOpportunity);
-//        setAccount(account);
-//    }
-        // Este es el constructor viejo, sin SalesRep, para el programa tal como estaba. Se queda así de momento.
+
     @Deprecated
     public Opportunity(Contact decisionMaker, Product product, int quantity) {
         setId();
@@ -101,12 +86,7 @@ public class Opportunity {
 
     //Getters and setters
     public void setId() {
-        this.id = generateId();
-    }
-
-
-    public static int generateId()  {
-        return idGenerator++;
+        this.id = id;
     }
 
     public int getId() {

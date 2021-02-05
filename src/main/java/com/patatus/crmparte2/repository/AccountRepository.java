@@ -17,8 +17,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Query("SELECT AVG(employeeCount) FROM Account")
     Double findMeanEmployeeCount();
 
-    // 2. The median employeeCount can be displayed by typing "Median EmployeeCount"
-
     // The maximum employeeCount
     @Query(value="SELECT a.id, a.employee_count FROM account a ORDER BY a.employee_count DESC LIMIT 1", nativeQuery = true)
     List<Object[]> findMaxEmployeeCount();

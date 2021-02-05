@@ -97,7 +97,6 @@ class AccountRepositoryTest {
         List<Object[]> maxOpportunities = accountRepository.findMaxOpportunitiesByAccount();
         assertEquals(maxOpportunities.get(0)[0], accounts.get(0).getId());
         assertEquals(maxOpportunities.get(0)[1], BigInteger.valueOf(2));
-
     }
 
     @Test

@@ -18,13 +18,9 @@ public class Contact {
     @OneToOne(mappedBy = "decisionMaker")
     private Opportunity opportunity;
 
-    // This is for the incremented self-generated id:
-    private static int idGenerator = 0;
-
     // Constructors:
     public Contact() {
     }
-
 
     public Contact(String name, String phoneNumber, String email, String companyName, Account account) {
         setId();
@@ -35,6 +31,7 @@ public class Contact {
         setAccount(account);
     }
 
+    @Deprecated
     public Contact(String name, String phoneNumber, String email, String companyName) {
         setId();
         setName(name);
@@ -61,11 +58,7 @@ public class Contact {
     }
 
     public void setId() {
-        this.id = generateId();
-    }
-
-    public static int generateId(){
-        return idGenerator++;
+        this.id = id;
     }
 
     public String getName() {

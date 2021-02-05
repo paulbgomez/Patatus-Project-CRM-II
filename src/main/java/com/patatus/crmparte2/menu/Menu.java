@@ -52,7 +52,7 @@ public class Menu {
                     System.out.print("Company name: ");
                     String companyName = readNonEmptyString(scanner,"VALID company name: ");
                     SalesRep repLead = readAndFindSalesRep(scanner);
-                    System.out.print("Are you sure all the data is ok? (Y || n): ");
+                    System.out.print("Are you sure all the data is ok? (Y/N): ");
                     if (scanner.nextLine().equalsIgnoreCase("Y")){
                         System.out.println(controller.newLead(name, phoneNumber, email, companyName, repLead));
                     }

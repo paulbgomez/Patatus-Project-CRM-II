@@ -28,21 +28,16 @@ public class Account {
     @Fetch(FetchMode.SUBSELECT)
     private List<Opportunity> opportunityList;
 
-    // This is for the incremented self-generated id:
-    private static int idGenerator = 0;
-
     // Constructor
 
     public Account() {
     }
 
     public Account(Industry industry, int employeeCount, String city, String country) {
-//        setId();
         setIndustry(industry);
         setEmployeeCount(employeeCount);
         setCity(city);
         setCountry(country);
-        // Esto se quitará cuando no tengamos nada que cuegue de las listas
         setContactList(new ArrayList<>());
         setOpportunityList(new ArrayList<>());
     }
@@ -94,11 +89,7 @@ public class Account {
     }
 
     public void setId() {
-        this.id = generateId();
-    }
-
-    public static int generateId(){
-        return idGenerator++;
+        this.id = id;
     }
 
     public Industry getIndustry() {

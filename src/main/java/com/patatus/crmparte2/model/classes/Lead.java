@@ -20,14 +20,10 @@ public class Lead {
     @ManyToOne
     private SalesRep repLead;
 
-    // To generate autoincrementID:
-    private static int idGenerator = 0;
-
-
     // Constructors:
     public Lead() {
     }
-        // Este constructor añade SalesRep, para las pruebas de la  BD. Se queda así de momento.
+
     public Lead(String name, String phoneNumber, String email, String companyName, SalesRep repLead) {
         setId();
         setName(name);
@@ -36,8 +32,7 @@ public class Lead {
         setCompanyName(companyName);
         setRepLead(repLead);
     }
-        // Este es el constructor viejo, sin SalesRep, para el programa tal como estaba. Se queda así de momento.
-    // Para que no pete le he puesto un salesrep, pero mañana hay que quitarlo
+
     @Deprecated
     public Lead(String name, String phoneNumber, String email, String companyName) {
         setId();
@@ -64,15 +59,11 @@ public class Lead {
 
     //Getters & Setters
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId() {
-        this.id = generateId();
-    }
-
-    public static int generateId()  {
-        return idGenerator++;
+        this.id = id;
     }
 
     public String getName() {
