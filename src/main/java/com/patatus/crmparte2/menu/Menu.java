@@ -151,13 +151,14 @@ public class Menu {
                 case REPORT_OPEN_BY_SALESREP:
                     System.out.println(controller.findOpportunityByStatusCountBySalesRep(OPEN));
                     break;
-                    
-                //case REPORT_LEAD_BY_PRODUCT:
                 case REPORT_OPPORTUNITY_BY_PRODUCT:
+                    System.out.println(controller.findLeadByProduct());
                 case REPORT_CLOSED_WON_BY_PRODUCT:
+                    System.out.println(controller.findLeadByProductStatusClosedWon());
                 case REPORT_CLOSED_LOST_BY_PRODUCT:
+                    System.out.println(controller.findLeadByProductStatusClosedLost());
                 case REPORT_OPEN_BY_PRODUCT:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.findLeadByProductStatusOpen());
                     break;
 
 
@@ -174,7 +175,6 @@ public class Menu {
                     System.out.println(controller.findOpenCountByCountry());
                     break;
 
-                //case REPORT_LEAD_BY_CITY:
                 case REPORT_OPPORTUNITY_BY_CITY:
                     System.out.println(controller.findOpportunityCountByCity());
                     break;
@@ -188,7 +188,6 @@ public class Menu {
                     System.out.println(controller.findOpenCountByCity());
                     break;
 
-                //case REPORT_LEAD_BY_INDUSTRY:
                 case REPORT_OPPORTUNITY_BY_INDUSTRY:
                     System.out.println(controller.findOpportunityCountByIndustry());
                     break;
@@ -203,10 +202,13 @@ public class Menu {
                     break;
                     
                 case MEAN_EMPLOYEECOUNT:
+                    System.out.println(controller.findMeanEmployee());
                 case MEDIAN_EMPLOYEECOUNT:
+                    System.out.println(controller.findMedianEmployee());
                 case MAX_EMPLOYEECOUNT:
+                    System.out.println(controller.findMaxEmployee());
                 case MIN_EMPLOYEECOUNT:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.findMinEmployee());
                     break;
 
                 case MEAN_QUANTITY:
