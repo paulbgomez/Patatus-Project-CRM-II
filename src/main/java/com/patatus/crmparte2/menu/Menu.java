@@ -130,7 +130,7 @@ public class Menu {
                     System.out.println(controller.newSalesRep(salesRepName));
                     break;
                 case SHOW_SALESREPS:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.showSalesReps());
                     break;
 
                 case REPORT_LEAD_BY_SALESREP:

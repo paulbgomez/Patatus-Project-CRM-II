@@ -202,6 +202,16 @@ public class Controller {
         return string;
     }
 
+
+    public String showSalesReps() {
+        List<SalesRep> salesReps = salesRepRepository.findAll();
+        String string = "";
+        for (SalesRep salesRep : salesReps){
+            string += salesRep.toString() +"\n";
+        }
+        return string;
+    }
+
     public String findLeadCountBySalesRep() {
         List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
         return printTwoResults(result);
