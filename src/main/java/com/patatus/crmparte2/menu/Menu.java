@@ -160,12 +160,18 @@ public class Menu {
                     System.out.println("not implemented yet");
                     break;
 
-                //case REPORT_LEAD_BY_COUNTRY:
+
                 case REPORT_OPPORTUNITY_BY_COUNTRY:
+                    System.out.println(controller.findOpportunityCountByCountry());
+                    break;
                 case REPORT_CLOSED_WON_BY_COUNTRY:
+                    System.out.println(controller.findClosedWonCountByCountry());
+                    break;
                 case REPORT_CLOSED_LOST_BY_COUNTRY:
+                    System.out.println(controller.findClosedLostCountByCountry());
+                    break;
                 case REPORT_OPEN_BY_COUNTRY:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.findOpenCountByCountry());
                     break;
 
                 //case REPORT_LEAD_BY_CITY:
