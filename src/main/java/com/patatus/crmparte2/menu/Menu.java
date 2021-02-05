@@ -44,14 +44,12 @@ public class Menu {
                         break;
                     }
                     System.out.print("Name: ");
-                    //String name = scanner.nextLine().trim();
                     String name = readNonEmptyString(scanner, "VALID name: ");
                     System.out.print("Phone number: ");
                     String phoneNumber = readFormattedString(scanner,"VALID phone number: ", "\\+?\\d{9,13}");
                     System.out.print("Email address: ");
                     String email =  readFormattedString(scanner,"VALID email address: ", "[\\w-.]+@(?:[\\w-]+\\.)+[\\w-]+");
                     System.out.print("Company name: ");
-                    //String companyName = scanner.nextLine().trim();
                     String companyName = readNonEmptyString(scanner,"VALID company name: ");
                     SalesRep repLead = readAndFindSalesRep(scanner);
                     System.out.print("Are you sure all the data is ok? (Y || n): ");

@@ -28,10 +28,6 @@ public class Controller {
     SalesRepRepository salesRepRepository;
 
 
-    private final Map<Integer, Lead> leadMap = new HashMap<>();
-    private final Map<Integer, Account> accountMap = new HashMap<>();
-    private final Map<Integer, Opportunity> opportunityMap = new HashMap<>();
-
     public String newSalesRep(String name) {
         SalesRep salesRep = new SalesRep(name);
         salesRep = salesRepRepository.save(salesRep);
@@ -43,7 +39,6 @@ public class Controller {
 
         Lead lead = new Lead(name, phoneNumber, email, companyName, repLead);
         lead = leadRepository.save(lead);
-        leadMap.put(lead.getId(), lead);
 
         return ">> Added new Lead: " + lead;
     }
@@ -51,14 +46,14 @@ public class Controller {
     // Method to display all the information regarding a lead, indicating his id.
     public String lookupLead(int id) {
         if (checkIfExistsLead(id))
-            return leadMap.get(id).toString();
+            return leadRepository.findById(id).toString();
 
         return printLeadNotFound(id);
     }
 
     // Method to display a list with all the existing leads in the database.
     public String showLeads() {
-        return mapValuesToString(leadMap);
+        return listToString(leadRepository.findAll());
     }
 
     // Method to convert a lead into an opportunity. When this happens, the lead disappears
@@ -94,15 +89,6 @@ public class Controller {
         return new Contact(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName(), account);
     }
 
-    // Method to create an opportunity: when a lead is converted to an opportunity,
-    // the user will be asked for the information regarding the possible sale.
-    @Deprecated
-    private Opportunity createOpportunity(Contact decisionMaker, SalesRep salesRep, Product product, int quantity, Account account) {
-
-        Opportunity opportunity = new Opportunity(decisionMaker, product, quantity, salesRep, account);
-        opportunityMap.put(opportunity.getId(), opportunity);
-        return opportunity;
-    }
 
     // Method to create an account: when a lead becomes an opportunity, an account is generated that
     // includes your contact (with the information that we had saved in your lead), and the information
@@ -117,27 +103,29 @@ public class Controller {
 
     // With this method, we will close an opportunity as successful, indicating the id number.
     public String closeWonOpp(int id) {
-        if(!checkIfExistsOpportunity(id))
+        Optional<Opportunity> opportunity = opportunityRepository.findById(id);
+
+        if (opportunity.isEmpty())
             return printOpportunityNotFound(id);
 
-        Opportunity opportunity = opportunityMap.get(id);
-        opportunity.closeWon();
-        return opportunity.toString();
+        opportunity.get().closeWon();
+        return opportunity.get().toString();
     }
 
     // With this method, we will close an opportunity as lost, indicating the id number.
     public String closeLostOpp(int id) {
-        if(!checkIfExistsOpportunity(id))
+        Optional<Opportunity> opportunity = opportunityRepository.findById(id);
+
+        if (opportunity.isEmpty())
             return printOpportunityNotFound(id);
 
-        Opportunity opportunity = opportunityMap.get(id);
-        opportunity.closeLost();
-        return opportunity.toString();
+        opportunity.get().closeLost();
+        return opportunity.get().toString();
     }
 
     // Method to display the list of accounts that are registered in the database.
     public String showAccounts() {
-        return mapValuesToString(accountMap);
+        return listToString(accountRepository.findAll());
     }
 
     // Method that returns an error message when the Lead with id does not exist.
@@ -153,6 +141,13 @@ public class Controller {
     // Method to display the values in a more user-friendly way
     public <T, T2> String mapValuesToString(Map<T2, T> map) {
         return map.values().stream()
+                .map(T::toString)
+                .collect(Collectors.joining("\n"));
+    }
+
+    // Method to display the values in a more user-friendly way
+    public <T> String listToString(List<T> list) {
+        return list.stream()
                 .map(T::toString)
                 .collect(Collectors.joining("\n"));
     }
