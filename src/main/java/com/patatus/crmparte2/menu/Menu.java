@@ -110,7 +110,7 @@ public class Menu {
                         String country = readNonEmptyString(scanner, "VALID Country: ");
                         account = controller.createAccount(industry, employeeCount, city, country);
                         System.out.println(controller.convertLead(idToConvert, product, quantity, account));
-                        System.out.println(">> Added new Account: " + account);
+                        System.out.println(">> Added new Account: " + controller.findAccount(account.getId()));
                     }
                     break;
 
