@@ -74,6 +74,8 @@ public class Controller {
         Opportunity opportunity = new Opportunity(decisionMaker, product, quantity, salesRep, account);
         opportunityRepository.save(opportunity);
 
+        leadRepository.delete(leadConvert);
+
         return ">> Created Opportunity: " + opportunity + "\n" +
                 "<< Removed Lead: " + leadConvert;
     }
