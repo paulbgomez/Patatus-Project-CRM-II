@@ -108,6 +108,7 @@ public class Controller {
             return printOpportunityNotFound(id);
 
         opportunity.get().closeWon();
+        opportunityRepository.save(opportunity.get());
         return opportunity.get().toString();
     }
 
@@ -119,6 +120,7 @@ public class Controller {
             return printOpportunityNotFound(id);
 
         opportunity.get().closeLost();
+        opportunityRepository.save(opportunity.get());
         return opportunity.get().toString();
     }
 
@@ -178,7 +180,7 @@ public class Controller {
     }
 
     // Lis MUST de previously ordered
-    public Integer findMedian(List<Object[]> objects){
+    public Integer findMedian(List<Integer[]> objects){
         Integer median;
         int medianPosition = objects.size()/2;
         if(objects.size() % 2 != 0 ){
@@ -198,7 +200,7 @@ public class Controller {
     public String printTwoResults(List<Object[]> result){
         StringBuilder string = new StringBuilder();
         for (Object[] row : result){
-            string.append(row[0].toString()).append(": ").append(((Long) row[1]).toString()).append("\n");
+            string.append(row[0].toString()).append(": ").append((row[1]).toString()).append("\n");
         }
         return string.toString();
     }
@@ -256,7 +258,7 @@ public class Controller {
     }
 
     public Integer findMedianEmployee () {
-        List<Object[]> result = accountRepository.findOpportunitiesByAccountOrdered();
+        List<Integer[]> result = accountRepository.findEmployeesByAccountOrdered();
         return findMedian(result);
     }
     public String findOpportunityCountBySalesRep() {
@@ -340,7 +342,7 @@ public class Controller {
     }
 
     public Integer findMedianQuantity() {
-        List<Object[]> result = opportunityRepository.orderOpportunities();
+        List<Integer[]> result = opportunityRepository.orderOpportunities();
         return findMedian(result);
     }
 

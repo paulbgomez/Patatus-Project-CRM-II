@@ -26,7 +26,7 @@ public interface SalesRepRepository extends JpaRepository<SalesRep, Integer> {
     @Query("SELECT s.name,COUNT(o) FROM SalesRep s LEFT JOIN s.repOpportunity o WHERE o.status = :status GROUP BY s")
     List<Object[]> findOpportunityByStatusCountBySalesRep(@Param("status") Enum status);
 
-    @Query("SELECT COUNT(id) FROM Account")
+    @Query("SELECT COUNT(id) FROM SalesRep")
     Integer countSalesRep();
 
 }

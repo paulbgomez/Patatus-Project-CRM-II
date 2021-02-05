@@ -25,9 +25,13 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Query(value="SELECT a.id, a.employee_count FROM account a ORDER BY a.employee_count ASC LIMIT 1", nativeQuery = true)
     List<Object[]> findMinEmployeeCount();
 
+    // Ordered employee by account for the median
+    @Query("SELECT a.employeeCount FROM Account a ORDER BY a.employeeCount")
+    List<Integer[]> findEmployeesByAccountOrdered();
+
     // Ordered opportunities by account for the median
     @Query(value="SELECT oo.count FROM (SELECT COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.account_id GROUP BY a.id) AS oo ORDER BY count", nativeQuery = true)
-    List<Object[]> findOpportunitiesByAccountOrdered();
+    List<Integer[]> findOpportunitiesByAccountOrdered();
 
     // Max opportunities by account
     @Query(value="SELECT a.id,COUNT(o.id) AS count FROM account a LEFT JOIN opportunity o ON a.id = o.account_id GROUP BY a.id ORDER BY count DESC LIMIT 1", nativeQuery = true)

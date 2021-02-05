@@ -13,7 +13,7 @@ public interface OpportunityRepository extends JpaRepository<Opportunity, Intege
 
     //Order to make the median query
     @Query ("SELECT o.quantity FROM Opportunity o ORDER BY o.quantity")
-    List<Object[]> orderOpportunities();
+    List<Integer[]> orderOpportunities();
 
     //The max quantity queries
     @Query(value="SELECT s.name, o.quantity FROM opportunity o INNER JOIN sales_rep s ON o.rep_opportunity_id = s.id ORDER BY o.quantity DESC LIMIT 1", nativeQuery = true)

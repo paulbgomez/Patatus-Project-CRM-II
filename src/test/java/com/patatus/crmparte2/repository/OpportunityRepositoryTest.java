@@ -128,7 +128,7 @@ class OpportunityRepositoryTest {
 
     @Test
     public void orderOpportunities(){
-        List<Object[]>  objects = opportunityRepository.orderOpportunities();
+        List<Integer[]>  objects = opportunityRepository.orderOpportunities();
         assertEquals(70, controller.findMedian(objects));
     }
 
