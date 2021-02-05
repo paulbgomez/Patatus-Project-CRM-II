@@ -9,6 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -182,5 +183,19 @@ public class Controller {
 
     public Optional<Account> findAccount(Integer id) {
         return accountRepository.findById(id);
+    }
+
+    public Integer findMedian(){
+        List<Object[]> opportunities = opportunityRepository.orderOpportunities();
+        Integer median;
+        int medianPosition = opportunities.size()/2;
+        if(opportunities.size() % 2 != 0 ){
+            median = (Integer) opportunities.get(medianPosition)[0];
+        } else {
+            Integer firstHalf = (Integer) opportunities.get((opportunities.size()/2)-1)[0];
+            Integer secondHalf = (Integer) opportunities.get(medianPosition)[0];
+            median = (firstHalf + secondHalf)/2;
+        }
+        return median;
     }
 }
