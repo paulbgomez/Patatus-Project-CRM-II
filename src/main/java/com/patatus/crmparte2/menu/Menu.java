@@ -153,10 +153,13 @@ public class Menu {
                     break;
                 case REPORT_OPPORTUNITY_BY_PRODUCT:
                     System.out.println(controller.findLeadByProduct());
+                    break;
                 case REPORT_CLOSED_WON_BY_PRODUCT:
                     System.out.println(controller.findLeadByProductStatusClosedWon());
+                    break;
                 case REPORT_CLOSED_LOST_BY_PRODUCT:
                     System.out.println(controller.findLeadByProductStatusClosedLost());
+                    break;
                 case REPORT_OPEN_BY_PRODUCT:
                     System.out.println(controller.findLeadByProductStatusOpen());
                     break;
