@@ -6,6 +6,7 @@ import com.patatus.crmparte2.model.classes.Account;
 import com.patatus.crmparte2.model.classes.SalesRep;
 import com.patatus.crmparte2.model.enums.Industry;
 import com.patatus.crmparte2.model.enums.Product;
+import com.patatus.crmparte2.model.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -132,7 +133,7 @@ public class Menu {
                     System.out.println(controller.newSalesRep(salesRepName));
                     break;
                 case SHOW_SALESREPS:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.showSalesReps());
                     break;
 
                 case REPORT_LEAD_BY_SALESREP:
@@ -183,10 +184,16 @@ public class Menu {
 
                 //case REPORT_LEAD_BY_INDUSTRY:
                 case REPORT_OPPORTUNITY_BY_INDUSTRY:
+                    System.out.println(controller.findOpportunityCountByIndustry());
+                    break;
                 case REPORT_CLOSED_WON_BY_INDUSTRY:
+                    System.out.println(controller.findOpportunityByStatusCountByIndustry(Status.CLOSED_WON));
+                    break;
                 case REPORT_CLOSED_LOST_BY_INDUSTRY:
+                    System.out.println(controller.findOpportunityByStatusCountByIndustry(Status.CLOSED_LOST));
+                    break;
                 case REPORT_OPEN_BY_INDUSTRY:
-                    System.out.println("not implemented yet");
+                    System.out.println(controller.findOpportunityByStatusCountByIndustry(Status.OPEN));
                     break;
                     
                 case MEAN_EMPLOYEECOUNT:

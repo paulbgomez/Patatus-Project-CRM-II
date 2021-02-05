@@ -6,6 +6,8 @@ import com.patatus.crmparte2.model.enums.Product;
 import com.patatus.crmparte2.model.enums.Status;
 import com.patatus.crmparte2.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -201,6 +203,16 @@ public class Controller {
         return string;
     }
 
+
+    public String showSalesReps() {
+        List<SalesRep> salesReps = salesRepRepository.findAll();
+        String string = "";
+        for (SalesRep salesRep : salesReps){
+            string += salesRep.toString() +"\n";
+        }
+        return string;
+    }
+
     public String findLeadCountBySalesRep() {
         List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
         return printTwoResults(result);
@@ -244,6 +256,15 @@ public class Controller {
         return printTwoResults(result);
     }
 
+    public String findOpportunityCountByIndustry() {
+        List<Object[]> result = opportunityRepository.findOpportunitiesByIndustry();
+        return printTwoResults(result);
+    }
+
+    public String findOpportunityByStatusCountByIndustry(Status status) {
+        List<Object[]> result = opportunityRepository.findByIndustryAndStatus(status);
+        return printTwoResults(result);
+    }
     public double findAvgOpportunitiesByAccount(){
         double result = accountRepository.findAvgOpportunitiesByAccount();
         return result;
