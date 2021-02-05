@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.patatus.crmparte2.model.enums.Status.*;
+
 @Service
 public class Controller {
     @Autowired
@@ -177,15 +179,14 @@ public class Controller {
         return accountRepository.findById(id);
     }
 
-    public Integer findMedian(){
-        List<Object[]> opportunities = opportunityRepository.orderOpportunities();
+    public Integer findMedian(List<Object[]> objects){
         Integer median;
-        int medianPosition = opportunities.size()/2;
-        if(opportunities.size() % 2 != 0 ){
-            median = (Integer) opportunities.get(medianPosition)[0];
+        int medianPosition = objects.size()/2;
+        if(objects.size() % 2 != 0 ){
+            median = (Integer) objects.get(medianPosition)[0];
         } else {
-            Integer firstHalf = (Integer) opportunities.get((opportunities.size()/2)-1)[0];
-            Integer secondHalf = (Integer) opportunities.get(medianPosition)[0];
+            Integer firstHalf = (Integer) objects.get((objects.size()/2)-1)[0];
+            Integer secondHalf = (Integer) objects.get(medianPosition)[0];
             median = (firstHalf + secondHalf)/2;
         }
         return median;
@@ -216,6 +217,50 @@ public class Controller {
     public String findLeadCountBySalesRep() {
         List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
         return printTwoResults(result);
+    }
+
+
+    //OPPORTUNITIES BY PRODUCT
+    public String findLeadByProduct() {
+        List<Object[]> result = opportunityRepository.findOpportunitiesByProduct();
+        return printTwoResults(result);
+    }
+
+    public String findLeadByProductStatusClosedWon() {
+        List<Object[]> result = opportunityRepository.findByProductAndStatus(CLOSED_WON);
+        return printTwoResults(result);
+    }
+
+    public String findLeadByProductStatusClosedLost() {
+        List<Object[]> result = opportunityRepository.findByProductAndStatus(CLOSED_LOST);
+        return printTwoResults(result);
+    }
+
+    public String findLeadByProductStatusOpen() {
+        List<Object[]> result = opportunityRepository.findByProductAndStatus(OPEN);
+        return printTwoResults(result);
+    }
+
+    //EMPLOYEE COUNTS
+    public String findMaxEmployee() {
+        List<Object[]> result = accountRepository.findMaxEmployeeCount();
+        return printTwoResults(result);
+    }
+
+    public String findMinEmployee() {
+        List<Object[]> result = accountRepository.findMinEmployeeCount();
+        return printTwoResults(result);
+    }
+
+    public double findMeanEmployee() {
+        double result = accountRepository.findMeanEmployeeCount();
+        return result;
+    }
+
+    public Integer findMedianEmployee () {
+        List<Object[]> result = accountRepository.findOpportunitiesByAccountOrdered();
+        Integer intResult = findMedian(result);
+        return intResult;
     }
     public String findOpportunityCountBySalesRep() {
         List<Object[]> result = salesRepRepository.findOpportunityCountBySalesRep();
