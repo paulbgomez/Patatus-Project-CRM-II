@@ -134,6 +134,8 @@ public class Menu {
                     break;
 
                 case REPORT_LEAD_BY_SALESREP:
+                    System.out.println(controller.findLeadCountBySalesRep());
+                    break;
                 case REPORT_OPPORTUNITY_BY_SALESREP:
                 case REPORT_CLOSED_WON_BY_SALESREP:
                 case REPORT_CLOSED_LOST_BY_SALESREP:

@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -192,5 +189,19 @@ public class Controller {
             median = (firstHalf + secondHalf)/2;
         }
         return median;
+    }
+
+
+
+    // REPORTING:
+
+
+    public String findLeadCountBySalesRep() {
+        List<Object[]> result = salesRepRepository.findLeadCountBySalesRep();
+        String string ="";
+        for (Object[] row : result){
+            string+=row[0].toString()+ " " + ((Long)row[1]).toString() +"\n";
+        }
+        return string;
     }
 }
